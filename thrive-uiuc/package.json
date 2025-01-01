@@ -16,8 +16,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@tsconfig/react-native": "^3.0.5",
+    "@types/jest": "^29.5.14",
     "@types/react": "~18.3.12",
-    "typescript": "^5.3.3"
+    "@types/react-test-renderer": "^19.0.0",
+    "typescript": "^5.7.2"
   },
   "private": true
 }

@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React, { useState, FC } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import Color from "./styles/Color";
+import AuthPage from "./components/AuthPage/AuthPage";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+export type Props = {};
+
+export enum PageName {
+  AuthPage = "AuthPage"
 }
 
+const App: FC<Props> = () => {
+  const [currentPage, setCurrentPage] = useState<PageName>(PageName.AuthPage);
+
+  return (
+    <View style={styles.container}>
+      {currentPage == PageName.AuthPage && <AuthPage />}
+    </View>
+  );
+};
+
+export default App;
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  container: {},
 });

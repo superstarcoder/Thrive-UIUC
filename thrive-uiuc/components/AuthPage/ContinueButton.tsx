@@ -9,11 +9,16 @@ import {
 import React from "react";
 import Color from "../../styles/Color";
 import { StyledH1, StyledH2 } from "../sharedComponents/Text/StyledText";
+import { PageName } from "../../App";
 
-const ContinueButton = () => {
+type Props = {
+  setCurrentPage: React.Dispatch<React.SetStateAction<PageName>>
+}
+
+const ContinueButton = ({setCurrentPage}: Props) => {
   return (
     <View>
-      <TouchableOpacity style={styles.continueButton}>
+      <TouchableOpacity style={styles.continueButton} onPress={() => {setCurrentPage("create-profile-page")}}>
         <StyledH2 text={"Continue with Illinois Email"} />
         <Image source={require("../../assets/logos/uiuc-logo.png")} style={styles.uiucLogo}/>
       </TouchableOpacity>

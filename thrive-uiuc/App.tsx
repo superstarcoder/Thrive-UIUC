@@ -6,16 +6,14 @@ import AuthPage from "./components/AuthPage/AuthPage";
 
 export type Props = {};
 
-export enum PageName {
-  AuthPage = "AuthPage"
-}
+export type PageName = "auth-page" | "create-profile-page"
 
 const App: FC<Props> = () => {
-  const [currentPage, setCurrentPage] = useState<PageName>(PageName.AuthPage);
+  const [currentPage, setCurrentPage] = useState<PageName>("auth-page");
 
   return (
     <View style={styles.container}>
-      {currentPage == PageName.AuthPage && <AuthPage />}
+      {currentPage == "auth-page" && <AuthPage />}
     </View>
   );
 };

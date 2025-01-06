@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useImperativeHandle,
 } from "react";
-import Color from "../../../styles/Color";
+import Color from "../../styles/Color";
 import { GestureDetector, Gesture } from "react-native-gesture-handler";
 import Animated, {
   Extrapolate,

@@ -1,4 +1,5 @@
 import {
+  GestureResponderEvent,
   Image,
   StyleSheet,
   Text,
@@ -10,12 +11,18 @@ import React from "react";
 import Color from "../../styles/Color";
 import { StyledH1, StyledH2 } from "../sharedComponents/Text/StyledText";
 
-const ContinueButton = () => {
+type Props = {
+    onPress: (event: GestureResponderEvent) => void;
+};
+
+const ContinueButton = (props: Props) => {
+  const { onPress } = props;
   return (
     <View>
-      <TouchableOpacity style={styles.continueButton}>
+      <TouchableOpacity style={styles.continueButton} onPress={onPress}>
         <StyledH2 text={"Continue with Illinois Email"} />
         <Image source={require("../../assets/logos/uiuc-logo.png")} style={styles.uiucLogo}/>
+        
       </TouchableOpacity>
     </View>
   );

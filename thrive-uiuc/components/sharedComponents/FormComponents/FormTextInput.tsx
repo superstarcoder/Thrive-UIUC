@@ -11,21 +11,21 @@ import { useFonts } from "expo-font";
 import React, { useState, forwardRef, useImperativeHandle } from "react";
 import Color from "../../../styles/Color";
 
-type Props = {
-  onFocus: any;
-  onBlur: any;
+export type Props = {
+  onFocus?: any;
+  onBlur?: any;
   placeholderText: string;
-  onChangeText: any;
+  onChangeText?: any;
   text: string;
   inputRef?: any;
   multiline?: boolean;
 };
 
 const FormTextInput = ({
-  onFocus,
-  onBlur,
+  onFocus = () => {},
+  onBlur = () => {},
   placeholderText,
-  onChangeText,
+  onChangeText = () => {},
   text,
   inputRef = undefined,
   multiline = false,

@@ -7,6 +7,10 @@ import FormTextInput from "../sharedComponents/FormComponents/FormTextInput";
 import FormFieldContainer from "../sharedComponents/FormComponents/FormFieldContainer";
 import MultipleChoice from "../sharedComponents/FormComponents/MultipleChoice";
 import { ScrollView } from "react-native-gesture-handler";
+import { HOBBY_TAGS, TagData } from "../sharedComponents/Tag";
+import TextInputDropDown from "../sharedComponents/FormComponents/TextInputDropDown";
+import Tag from "../sharedComponents/Tag";
+import { isEqualTagData, objectMatchesAnyInArray } from "../../utils/utils";
 
 export type Props = {};
 
@@ -23,19 +27,13 @@ const majors = [
   "Mechanical Engineering",
 ];
 type Major = (typeof majors)[number];
-
-// temporary list of hobbies (need to make a more comprehensive list later)
-const hobbies = ["biking", "baking", "badminton", "boxing"];
-
-export type Hobby = (typeof hobbies)[number];
 export type ProfileSettings = {
   name: string;
   year: Year | null;
   major: Major | null;
   introduction: string;
-  hobbies: Hobby[];
+  hobbies: TagData[];
 };
-
 const defaultProfileSettings: ProfileSettings = {
   name: "",
   year: null,
@@ -62,21 +60,26 @@ const ProfileSettingsModal = () => {
   const updateIntroduction = (newIntroduction: string) =>
     setProfileSettings((prev) => ({ ...prev, introduction: newIntroduction }));
 
-  const addHobby = (newHobby: Hobby) =>
+  const addHobby = (newHobby: TagData) => {
+    if (objectMatchesAnyInArray(newHobby, profileSettings.hobbies)) return;
+
     setProfileSettings((prev) => ({
       ...prev,
       hobbies: [...prev.hobbies, newHobby],
     }));
+  };
 
-  const removeHobby = (hobbyToRemove: Hobby) =>
+  const removeHobby = (hobbyToRemove: TagData) =>
     setProfileSettings((prev) => ({
       ...prev,
-      hobbies: prev.hobbies.filter((h) => h !== hobbyToRemove),
+      hobbies: prev.hobbies.filter((h) => !isEqualTagData(h, hobbyToRemove)),
     }));
 
   useEffect(() => {
     bottomSheetRef?.current?.scrollTo(1);
   }, []);
+
+  console.log(profileSettings.hobbies);
 
   return (
     <View>
@@ -89,14 +92,27 @@ const ProfileSettingsModal = () => {
         <ScrollView>
           <View style={styles.modalStyle}>
             <FormFieldContainer>
+              <StyledH2 text="Hobbies*" />
+              <TextInputDropDown
+                isMultiselect={true}
+                onAddTag={addHobby}
+                onRemoveTag={removeHobby}
+                allTags={HOBBY_TAGS}
+                selectedTags={profileSettings.hobbies}
+              />
+            </FormFieldContainer>
+
+            <FormFieldContainer>
               <StyledH2 text="Name*" />
               <FormTextInput
                 onFocus={() => {}}
                 onBlur={() => {}}
                 placeholderText={"placeholder text"}
                 text={profileSettings.name}
-                onChangeText={(newName: string) => {updateName(newName)}}
-                multiline={true}
+                onChangeText={(newName: string) => {
+                  updateName(newName);
+                }}
+                multiline={false}
               />
             </FormFieldContainer>
 
@@ -107,7 +123,9 @@ const ProfileSettingsModal = () => {
               </View>
               <MultipleChoice
                 options={[...years]}
-                onSelect={(selectedYear: Year) => {updateYear(selectedYear)}}
+                onSelect={(selectedYear: Year) => {
+                  updateYear(selectedYear);
+                }}
                 selectedOption={profileSettings.year}
               />
             </FormFieldContainer>
@@ -126,13 +144,11 @@ const ProfileSettingsModal = () => {
                 onBlur={() => {}}
                 placeholderText={"placeholder text"}
                 text={profileSettings.introduction}
-                onChangeText={(newIntroduction: string) => {updateIntroduction(newIntroduction)}}
+                onChangeText={(newIntroduction: string) => {
+                  updateIntroduction(newIntroduction);
+                }}
                 multiline={true}
               />
-            </FormFieldContainer>
-
-            <FormFieldContainer>
-              <StyledH2 text="Hobbies*" />
             </FormFieldContainer>
           </View>
         </ScrollView>

@@ -31,13 +31,13 @@ const FormTextInput = ({
   multiline = false,
 }: Props) => {
   // load fonts
-//   var [fontsLoaded] = useFonts({
-//     MPlusRegular: require("../../assets/fonts/mplusRegular.ttf"),
-//     MPlusMedium: require("../../assets/fonts/mplusMedium.ttf"),
-//   });
-//   if (!fontsLoaded) {
-//     return null;
-//   }
+  //   var [fontsLoaded] = useFonts({
+  //     MPlusRegular: require("../../assets/fonts/mplusRegular.ttf"),
+  //     MPlusMedium: require("../../assets/fonts/mplusMedium.ttf"),
+  //   });
+  //   if (!fontsLoaded) {
+  //     return null;
+  //   }
 
   return (
     <View>
@@ -62,5 +62,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#000",
     borderBottomWidth: 1,
     fontFamily: "MPlusRegular",
+    paddingTop: 0,
+    paddingBottom: 0,
   },
 });

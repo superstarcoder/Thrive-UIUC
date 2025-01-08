@@ -12,7 +12,7 @@ export type TagData = {
 };
 
 // // temporary list of hobbies (need to make a more comprehensive list later)
-export const HOBBIES = ["biking", "baking", "badminton", "boxing", "additional"];
+export const HOBBIES = ["biking", "baking", "badminton", "boxing"];
 export type Hobby = (typeof HOBBIES)[number];
 
 // used to pair hobbies list of labels with other styling properties for the tag (eg: color, emoji, etc)
@@ -32,11 +32,11 @@ export const tagDataLookup = (
 
 type Props = {
   label: string;
-  onRemoveTag: any;
+  onRemoveTag?: any;
   tagDataLookupList?: TagData[] | undefined;
 };
 
-const Tag = ({ label, onRemoveTag, tagDataLookupList = undefined }: Props) => {
+const Tag = ({ label, onRemoveTag = () => {}, tagDataLookupList = undefined }: Props) => {
   let tagData: TagData = tagDataLookup(label, tagDataLookupList) || {
     label,
     color: Color.blue,

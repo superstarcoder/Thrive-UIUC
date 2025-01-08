@@ -7,7 +7,12 @@ import FormTextInput from "../sharedComponents/FormComponents/FormTextInput";
 import FormFieldContainer from "../sharedComponents/FormComponents/FormFieldContainer";
 import MultipleChoice from "../sharedComponents/FormComponents/MultipleChoice";
 import { ScrollView } from "react-native-gesture-handler";
-import { HOBBIES, Hobby, TagData, HOBBY_TAG_DATA } from "../sharedComponents/Tag";
+import {
+  HOBBIES,
+  Hobby,
+  TagData,
+  HOBBY_TAG_DATA,
+} from "../sharedComponents/Tag";
 import TextInputDropDown from "../sharedComponents/FormComponents/TextInputDropDown";
 import Tag from "../sharedComponents/Tag";
 import { isEqualTagData, objectMatchesAnyInArray } from "../../utils/utils";
@@ -25,6 +30,8 @@ export const MAJORS = [
   "Computer Engineering",
   "Electrical Engineering",
   "Mechanical Engineering",
+  "Biotechnology and Molecular Biosciences.",
+  "Computer Science & Statistics",
 ];
 type Major = (typeof MAJORS)[number];
 
@@ -57,6 +64,12 @@ const ProfileSettingsModal = () => {
 
   const updateMajor = (newMajor: Major | null) =>
     setProfileSettings((prev) => ({ ...prev, major: newMajor }));
+
+  const deleteMajor = (major: Major | null) =>
+    setProfileSettings((prev) => ({
+      ...prev,
+      major: null,
+    }));
 
   const updateIntroduction = (newIntroduction: string) =>
     setProfileSettings((prev) => ({ ...prev, introduction: newIntroduction }));
@@ -92,29 +105,6 @@ const ProfileSettingsModal = () => {
       >
         <ScrollView>
           <View style={styles.modalStyle}>
-            {/* <FormFieldContainer>
-              <StyledH2 text="Major*" />
-              <TextInputDropDown
-                isMultiselect={true}
-                onAddTag={updateMajor}
-                onRemoveTag={() => {}}
-                allTags={HOBBY_TAGS}
-                selectedTags={profileSettings.hobbies}
-              />
-            </FormFieldContainer> */}
-
-            <FormFieldContainer>
-              <StyledH2 text="Hobbies*" />
-              <TextInputDropDown
-                isMultiselect={true}
-                onAddTag={addHobby}
-                onRemoveTag={removeHobby}
-                tagDataLookupList={HOBBY_TAG_DATA}
-                selectedTagLabels={profileSettings.hobbies}
-                allTagLabels={HOBBIES}
-              />
-            </FormFieldContainer>
-
             <FormFieldContainer>
               <StyledH2 text="Name*" />
               <FormTextInput
@@ -144,6 +134,21 @@ const ProfileSettingsModal = () => {
             </FormFieldContainer>
 
             <FormFieldContainer>
+              <StyledH2 text="Major*" />
+              <TextInputDropDown
+                isMultiselect={false}
+                onAddTag={updateMajor}
+                onRemoveTag={deleteMajor}
+                selectedTagLabels={
+                  profileSettings.major !== null
+                    ? [profileSettings.major ?? ""]
+                    : []
+                }
+                allTagLabels={MAJORS}
+              />
+            </FormFieldContainer>
+
+            <FormFieldContainer>
               <View style={styles.titleAndSubtitle}>
                 <StyledH2 text="Introduction* " />
                 <StyledH4 text="(max: 150 chars)" style={styles.subtitle} />
@@ -157,6 +162,18 @@ const ProfileSettingsModal = () => {
                   updateIntroduction(newIntroduction);
                 }}
                 multiline={true}
+              />
+            </FormFieldContainer>
+
+            <FormFieldContainer>
+              <StyledH2 text="Hobbies*" />
+              <TextInputDropDown
+                isMultiselect={true}
+                onAddTag={addHobby}
+                onRemoveTag={removeHobby}
+                tagDataLookupList={HOBBY_TAG_DATA}
+                selectedTagLabels={profileSettings.hobbies}
+                allTagLabels={HOBBIES}
               />
             </FormFieldContainer>
           </View>
@@ -175,6 +192,7 @@ const styles = StyleSheet.create({
   modalStyle: {
     paddingHorizontal: 30,
     gap: 24,
+    paddingBottom: 1000,
   },
   titleAndSubtitle: {
     display: "flex",

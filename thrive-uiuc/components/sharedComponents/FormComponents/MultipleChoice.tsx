@@ -21,7 +21,7 @@ const MultipleChoice = ({ options, onSelect, selectedOption }: Props) => {
           style={styles.selectionOption}
         >
           {selectedOption === option ? (
-            <CheckSquare size={25} color={Color.lightgray}/>
+            <CheckSquare size={25} color={Color.lightgray} weight="fill" />
           ) : (
             <Square size={25} color={Color.lightgray} />
           )}

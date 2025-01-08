@@ -46,19 +46,19 @@ const filterTags = (
 type Props = {
   isMultiselect: boolean;
   onAddTag: any;
-  onRemoveTag: any;
+  onRemoveTag?: any;
   allTagLabels: string[];
   selectedTagLabels: string[];
-  tagDataLookupList: TagData[];
+  tagDataLookupList?: TagData[];
 };
 
 const TextInputDropDown = ({
   isMultiselect,
   onAddTag,
-  onRemoveTag,
+  onRemoveTag = () => {},
   allTagLabels,
   selectedTagLabels,
-  tagDataLookupList,
+  tagDataLookupList = [],
 }: Props) => {
   const [filteredTags, setFilteredTags] = useState<string[]>([]);
   const [textInputString, setTextInputString] = useState<string>("");
@@ -144,9 +144,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 7,
     textAlignVertical: "center",
     alignItems: "center",
-    height: optionHeight,
+    minHeight: optionHeight,
     flexDirection: "row",
     gap: 7,
+    alignSelf: "flex-start",
+    minWidth: "70%",
   },
   optionText: {
     color: Color.lightgray,
@@ -158,7 +160,6 @@ const styles = StyleSheet.create({
     maxHeight:
       optionHeight * numOptionsDisplayed +
       dropdownOptionsGap * (numOptionsDisplayed - 1),
-    width: "60%",
   },
   tagsContainer: {
     flexWrap: "wrap",

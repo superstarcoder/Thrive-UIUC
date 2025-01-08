@@ -30,15 +30,6 @@ const FormTextInput = ({
   inputRef = undefined,
   multiline = false,
 }: Props) => {
-  // load fonts
-  //   var [fontsLoaded] = useFonts({
-  //     MPlusRegular: require("../../assets/fonts/mplusRegular.ttf"),
-  //     MPlusMedium: require("../../assets/fonts/mplusMedium.ttf"),
-  //   });
-  //   if (!fontsLoaded) {
-  //     return null;
-  //   }
-
   return (
     <View>
       <TextInput

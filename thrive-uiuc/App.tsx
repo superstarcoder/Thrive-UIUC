@@ -5,10 +5,16 @@ import Color from "./styles/Color";
 import AuthPage from "./components/AuthPage/AuthPage";
 import CreateProfilePage from "./components/ProfilePage/CreateProfilePage";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import HomePage from "./components/HomePage/HomePage";
+import MeetNewStudentsPage from "./components/MeetNewStudentsPage/MeetNewStudentsPage";
 
 export type Props = {};
 
-export type PageName = "auth-page" | "create-profile-page";
+export type PageName =
+  | "auth-page"
+  | "create-profile-page"
+  | "home-page"
+  | "meet-new-students-page";
 
 const App: FC<Props> = () => {
   const [currentPage, setCurrentPage] = useState<PageName>("auth-page");
@@ -19,7 +25,11 @@ const App: FC<Props> = () => {
         {currentPage == "auth-page" && (
           <AuthPage setCurrentPage={setCurrentPage} />
         )}
-        {currentPage == "create-profile-page" && <CreateProfilePage />}
+        {currentPage == "create-profile-page" && (
+          <CreateProfilePage setCurrentPage={setCurrentPage} />
+        )}
+        {currentPage == "home-page" && <HomePage />}
+        {currentPage == "meet-new-students-page" && <MeetNewStudentsPage />}
       </View>
     </GestureHandlerRootView>
   );

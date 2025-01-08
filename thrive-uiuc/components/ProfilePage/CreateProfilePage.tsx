@@ -2,10 +2,14 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import ProfileSettingsModal from "./ProfileSettingsModal";
 
-const CreateProfilePage = () => {
+type Props = {
+  setCurrentPage: any
+}
+
+const CreateProfilePage = ({setCurrentPage}: Props) => {
   return (
     <>
-      <ProfileSettingsModal />
+      <ProfileSettingsModal onSavePress={() => {setCurrentPage("home-page")}}/>
     </>
   );
 };

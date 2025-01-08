@@ -1,8 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import BottomSheet from "../sharedComponents/BottomSheet";
 import Color from "../../styles/Color";
-import { StyledH2, StyledH4 } from "../sharedComponents/Text/StyledText";
+import {
+  StyledH1,
+  StyledH2,
+  StyledH4,
+} from "../sharedComponents/Text/StyledText";
 import FormTextInput from "../sharedComponents/FormComponents/FormTextInput";
 import FormFieldContainer from "../sharedComponents/FormComponents/FormFieldContainer";
 import MultipleChoice from "../sharedComponents/FormComponents/MultipleChoice";
@@ -17,7 +21,7 @@ import TextInputDropDown from "../sharedComponents/FormComponents/TextInputDropD
 import Tag from "../sharedComponents/Tag";
 import { isEqualTagData, objectMatchesAnyInArray } from "../../utils/utils";
 
-export type Props = {};
+export type Props = {onSavePress: any};
 
 const YEARS = ["Freshman", "Sophomore", "Junior", "Senior"] as const;
 type Year = (typeof YEARS)[number];
@@ -50,7 +54,7 @@ const defaultProfileSettings: ProfileSettings = {
   hobbies: [],
 };
 
-const ProfileSettingsModal = () => {
+const ProfileSettingsModal = ({onSavePress}: Props) => {
   const bottomSheetRef: any = useRef(null);
   const [profileSettings, setProfileSettings] = useState<ProfileSettings>(
     defaultProfileSettings
@@ -105,6 +109,11 @@ const ProfileSettingsModal = () => {
       >
         <ScrollView>
           <View style={styles.modalStyle}>
+            <TouchableOpacity onPress={onSavePress}>
+              <View style={styles.saveButton}>
+                <StyledH1 text={"Save"} style={styles.saveButtonText} />
+              </View>
+            </TouchableOpacity>
             <FormFieldContainer>
               <StyledH2 text="Name*" />
               <FormTextInput
@@ -186,6 +195,16 @@ const ProfileSettingsModal = () => {
 export default ProfileSettingsModal;
 
 const styles = StyleSheet.create({
+  saveButton: {
+    alignSelf: "center",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    backgroundColor: Color.orange,
+    borderRadius: 10,
+  },
+  saveButtonText: {
+    color: "black",
+  },
   modalContainerStyle: {
     backgroundColor: Color.grayBlue,
   },

@@ -1,4 +1,5 @@
 import {
+  GestureResponderEvent,
   Image,
   StyleSheet,
   Text,
@@ -12,7 +13,7 @@ import { StyledH1, StyledH2 } from "../sharedComponents/Text/StyledText";
 import { PageName } from "../../App";
 
 type Props = {
-  setCurrentPage: React.Dispatch<React.SetStateAction<PageName>>
+  setCurrentPage: any
 }
 
 const ContinueButton = ({setCurrentPage}: Props) => {
@@ -21,6 +22,7 @@ const ContinueButton = ({setCurrentPage}: Props) => {
       <TouchableOpacity style={styles.continueButton} onPress={() => {setCurrentPage("create-profile-page")}}>
         <StyledH2 text={"Continue with Illinois Email"} />
         <Image source={require("../../assets/logos/uiuc-logo.png")} style={styles.uiucLogo}/>
+        
       </TouchableOpacity>
     </View>
   );

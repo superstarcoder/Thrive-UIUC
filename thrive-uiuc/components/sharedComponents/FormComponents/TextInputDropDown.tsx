@@ -79,6 +79,18 @@ const TextInputDropDown = ({
         <ScrollView style={styles.dropdownContainer}>
           {filteredTags.length > 0 && (
             <View style={styles.dropdown}>
+              {!filteredTags.includes(textInputString) && (
+                <TouchableOpacity
+                  key={textInputString}
+                  style={styles.option}
+                  onPress={() => {
+                    onAddTag(textInputString);
+                  }}
+                >
+                  <StyledH3 style={styles.optionText} text={textInputString} />
+                </TouchableOpacity>
+              )}
+
               {filteredTags.map((item) => (
                 <TouchableOpacity
                   key={item}

@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import FormTextInput from "./FormTextInput";
-import Tag, { TagData } from "../Tag";
+import Tag, { HOBBY_TAG_DATA, TagData, tagDataLookup } from "../Tag";
 import Color from "../../../styles/Color";
 import { StyledH3, StyledH4 } from "../Text/StyledText";
 
@@ -21,47 +21,51 @@ const calculateSimilarity = (input: string, option: string): number => {
 
 // Function to filter and sort the tags
 const filterTags = (
-  input: string,
-  tags: TagData[],
-  selectedTags: TagData[]
-): TagData[] => {
-  if (!input) return [];
-  const lowercaseInput = input.toLowerCase();
-  // Create a set of selected labels for faster lookup
-  const selectedLabels = new Set(
-    selectedTags.map((tag) => tag.label.toLowerCase())
+  newText: string,
+  allTagLabels: string[],
+  selectedTagLabels: string[]
+): string[] => {
+  if (!newText) return [];
+
+  const lowercaseInput = newText.toLowerCase();
+  // Create a set of selected tags for faster lookup
+  const selectedSet = new Set(
+    selectedTagLabels.map((tag) => tag.toLowerCase())
   );
 
-  return tags
-    .filter((tag) => !selectedLabels.has(tag.label.toLowerCase()))
+  return allTagLabels
+    .filter((tag) => !selectedSet.has(tag.toLowerCase())) // Exclude selected tags
     .map((tag) => ({
-      ...tag,
-      similarity: calculateSimilarity(lowercaseInput, tag.label.toLowerCase()),
+      tag, // Keep original tag for returning later
+      similarity: calculateSimilarity(lowercaseInput, tag.toLowerCase()),
     }))
-    .sort((a, b) => b.similarity - a.similarity);
+    .sort((a, b) => b.similarity - a.similarity) // Sort by similarity score (descending)
+    .map((item) => item.tag); // Return only the sorted tags
 };
 
 type Props = {
   isMultiselect: boolean;
   onAddTag: any;
   onRemoveTag: any;
-  allTags: TagData[];
-  selectedTags: TagData[];
+  allTagLabels: string[];
+  selectedTagLabels: string[];
+  tagDataLookupList: TagData[];
 };
 
 const TextInputDropDown = ({
   isMultiselect,
   onAddTag,
   onRemoveTag,
-  allTags,
-  selectedTags,
+  allTagLabels,
+  selectedTagLabels,
+  tagDataLookupList,
 }: Props) => {
-  const [filteredTags, setFilteredTags] = useState<TagData[]>([]);
+  const [filteredTags, setFilteredTags] = useState<string[]>([]);
   const [textInputString, setTextInputString] = useState<string>("");
 
   const onChangeText = (newText: string) => {
     setTextInputString(newText);
-    setFilteredTags(filterTags(newText, allTags, selectedTags));
+    setFilteredTags(filterTags(newText, allTagLabels, selectedTagLabels));
   };
 
   return (
@@ -77,16 +81,20 @@ const TextInputDropDown = ({
             <View style={styles.dropdown}>
               {filteredTags.map((item) => (
                 <TouchableOpacity
-                  key={item.label}
+                  key={item}
                   style={styles.option}
                   onPress={() => {
                     onAddTag(item);
                   }}
                 >
-                  <StyledH3
-                    style={styles.optionText}
-                    text={item.label + " " + item.emoji}
-                  />
+                  <StyledH3 style={styles.optionText} text={item} />
+                  {tagDataLookup(item, tagDataLookupList)?.emoji !=
+                    undefined && (
+                    <StyledH3
+                      style={styles.optionText}
+                      text={"" + tagDataLookup(item, tagDataLookupList)?.emoji}
+                    />
+                  )}
                 </TouchableOpacity>
               ))}
             </View>
@@ -95,13 +103,14 @@ const TextInputDropDown = ({
       </View>
 
       <View style={styles.tagsContainer}>
-        {selectedTags.length > 0 && (
+        {selectedTagLabels.length > 0 && (
           <>
-            {selectedTags.map((tagData) => (
+            {selectedTagLabels.map((tagLabel) => (
               <Tag
-                tagData={tagData}
+                label={tagLabel}
+                tagDataLookupList={tagDataLookupList}
                 onRemoveTag={onRemoveTag}
-                key={tagData.label}
+                key={tagLabel}
               />
             ))}
           </>
@@ -120,10 +129,12 @@ const dropdownOptionsGap = 2;
 const styles = StyleSheet.create({
   option: {
     backgroundColor: Color.gray,
-    paddingHorizontal: 3,
+    paddingHorizontal: 7,
     textAlignVertical: "center",
-    justifyContent: "center",
+    alignItems: "center",
     height: optionHeight,
+    flexDirection: "row",
+    gap: 7,
   },
   optionText: {
     color: Color.lightgray,

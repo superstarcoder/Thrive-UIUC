@@ -7,18 +7,18 @@ import FormTextInput from "../sharedComponents/FormComponents/FormTextInput";
 import FormFieldContainer from "../sharedComponents/FormComponents/FormFieldContainer";
 import MultipleChoice from "../sharedComponents/FormComponents/MultipleChoice";
 import { ScrollView } from "react-native-gesture-handler";
-import { HOBBY_TAGS, TagData } from "../sharedComponents/Tag";
+import { HOBBIES, Hobby, TagData, HOBBY_TAG_DATA } from "../sharedComponents/Tag";
 import TextInputDropDown from "../sharedComponents/FormComponents/TextInputDropDown";
 import Tag from "../sharedComponents/Tag";
 import { isEqualTagData, objectMatchesAnyInArray } from "../../utils/utils";
 
 export type Props = {};
 
-const years = ["Freshman", "Sophomore", "Junior", "Senior"] as const;
-type Year = (typeof years)[number];
+const YEARS = ["Freshman", "Sophomore", "Junior", "Senior"] as const;
+type Year = (typeof YEARS)[number];
 
 // temporary list of majors (need to make a full list later)
-const majors = [
+export const MAJORS = [
   "Aerospace Engineering",
   "Bioengineering",
   "Civil Engineering",
@@ -26,13 +26,14 @@ const majors = [
   "Electrical Engineering",
   "Mechanical Engineering",
 ];
-type Major = (typeof majors)[number];
+type Major = (typeof MAJORS)[number];
+
 export type ProfileSettings = {
   name: string;
   year: Year | null;
   major: Major | null;
   introduction: string;
-  hobbies: TagData[];
+  hobbies: Hobby[];
 };
 const defaultProfileSettings: ProfileSettings = {
   name: "",
@@ -60,8 +61,8 @@ const ProfileSettingsModal = () => {
   const updateIntroduction = (newIntroduction: string) =>
     setProfileSettings((prev) => ({ ...prev, introduction: newIntroduction }));
 
-  const addHobby = (newHobby: TagData) => {
-    if (objectMatchesAnyInArray(newHobby, profileSettings.hobbies)) return;
+  const addHobby = (newHobby: Hobby) => {
+    if (profileSettings.hobbies.includes(newHobby)) return;
 
     setProfileSettings((prev) => ({
       ...prev,
@@ -69,10 +70,10 @@ const ProfileSettingsModal = () => {
     }));
   };
 
-  const removeHobby = (hobbyToRemove: TagData) =>
+  const removeHobby = (hobbyToRemove: Hobby) =>
     setProfileSettings((prev) => ({
       ...prev,
-      hobbies: prev.hobbies.filter((h) => !isEqualTagData(h, hobbyToRemove)),
+      hobbies: prev.hobbies.filter((h) => h != hobbyToRemove),
     }));
 
   useEffect(() => {
@@ -91,14 +92,26 @@ const ProfileSettingsModal = () => {
       >
         <ScrollView>
           <View style={styles.modalStyle}>
+            {/* <FormFieldContainer>
+              <StyledH2 text="Major*" />
+              <TextInputDropDown
+                isMultiselect={true}
+                onAddTag={updateMajor}
+                onRemoveTag={() => {}}
+                allTags={HOBBY_TAGS}
+                selectedTags={profileSettings.hobbies}
+              />
+            </FormFieldContainer> */}
+
             <FormFieldContainer>
               <StyledH2 text="Hobbies*" />
               <TextInputDropDown
                 isMultiselect={true}
                 onAddTag={addHobby}
                 onRemoveTag={removeHobby}
-                allTags={HOBBY_TAGS}
-                selectedTags={profileSettings.hobbies}
+                tagDataLookupList={HOBBY_TAG_DATA}
+                selectedTagLabels={profileSettings.hobbies}
+                allTagLabels={HOBBIES}
               />
             </FormFieldContainer>
 
@@ -122,16 +135,12 @@ const ProfileSettingsModal = () => {
                 <StyledH4 text="(pick one)" style={styles.subtitle} />
               </View>
               <MultipleChoice
-                options={[...years]}
+                options={[...YEARS]}
                 onSelect={(selectedYear: Year) => {
                   updateYear(selectedYear);
                 }}
                 selectedOption={profileSettings.year}
               />
-            </FormFieldContainer>
-
-            <FormFieldContainer>
-              <StyledH2 text="Major*" />
             </FormFieldContainer>
 
             <FormFieldContainer>

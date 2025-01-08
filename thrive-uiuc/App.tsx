@@ -2,35 +2,41 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState, FC } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Color from "./styles/Color";
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import AuthPage from "./components/AuthPage/AuthPage";
+import CreateProfilePage from "./components/ProfilePage/CreateProfilePage";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import HomePage from "./components/HomePage/HomePage";
+import MeetNewStudentsPage from "./components/MeetNewStudentsPage/MeetNewStudentsPage";
 
 export type Props = {};
 
-export type PageName = "auth-page" | "create-profile-page"
-
-const Stack = createStackNavigator();
+export type PageName =
+  | "auth-page"
+  | "create-profile-page"
+  | "home-page"
+  | "meet-new-students-page";
 
 const App: FC<Props> = () => {
-    const [currentPage, setCurrentPage] = useState<PageName>("auth-page");
+  const [currentPage, setCurrentPage] = useState<PageName>("auth-page");
 
-    return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="auth-page" screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="auth-page" component={AuthPage}/>
-                <Stack.Screen name="home-page" component={HomePage}/>
-                {/* <View style={styles.container}>
-                    {currentPage == "auth-page" && <AuthPage />}
-                </View> */}
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+  return (
+    <GestureHandlerRootView>
+      <View style={styles.container}>
+        {currentPage == "auth-page" && (
+          <AuthPage setCurrentPage={setCurrentPage} />
+        )}
+        {currentPage == "create-profile-page" && (
+          <CreateProfilePage setCurrentPage={setCurrentPage} />
+        )}
+        {currentPage == "home-page" && <HomePage />}
+        {currentPage == "meet-new-students-page" && <MeetNewStudentsPage />}
+      </View>
+    </GestureHandlerRootView>
+  );
 };
 
 export default App;
 
 const styles = StyleSheet.create({
-    container: {},
+  container: {},
 });

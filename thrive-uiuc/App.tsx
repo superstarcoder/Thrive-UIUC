@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthPage from "./components/AuthPage/AuthPage";
 import HomePage from "./components/HomePage/HomePage";
+import MeetNewStudentsPage from "./components/MeetNewStudentsPage/MeetNewStudentsPage";
 
 export type Props = {};
 
@@ -21,6 +22,7 @@ const App: FC<Props> = () => {
             <Stack.Navigator initialRouteName="auth-page" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="auth-page" component={AuthPage}/>
                 <Stack.Screen name="home-page" component={HomePage}/>
+                <Stack.Screen name="meet-new-page" component={MeetNewStudentsPage}/>
                 {/* <View style={styles.container}>
                     {currentPage == "auth-page" && <AuthPage />}
                 </View> */}

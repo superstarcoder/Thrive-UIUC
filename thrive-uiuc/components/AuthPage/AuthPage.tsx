@@ -19,11 +19,12 @@ const AuthPage = (props: Props) => {
   )
 }
 
-export default AuthPage
+export default AuthPage;
 
 const styles = StyleSheet.create({
   authPage: {
-    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: "0%",
     gap: 20,
   }
 })

@@ -1,17 +1,16 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import sharedStyles from "../../styles/SharedStyles";
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 
-type Props = {};
+type Props = {}
 
 const MeetNewStudentsPage = (props: Props) => {
   return (
-    <View style={[sharedStyles.pageContainer]}>
-      <Text>Template Component</Text>
+    <View>
+      <Text>MeetNewStudentsPage</Text>
     </View>
-  );
-};
+  )
+}
 
-export default MeetNewStudentsPage;
+export default MeetNewStudentsPage
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({})

@@ -10,16 +10,16 @@ import {
 import React from "react";
 import Color from "../../styles/Color";
 import { StyledH1, StyledH2 } from "../sharedComponents/Text/StyledText";
+import { PageName } from "../../App";
 
 type Props = {
-    onPress: (event: GestureResponderEvent) => void;
-};
+  setCurrentPage: any
+}
 
-const ContinueButton = (props: Props) => {
-  const { onPress } = props;
+const ContinueButton = ({setCurrentPage}: Props) => {
   return (
     <View>
-      <TouchableOpacity style={styles.continueButton} onPress={onPress}>
+      <TouchableOpacity style={styles.continueButton} onPress={() => {setCurrentPage("create-profile-page")}}>
         <StyledH2 text={"Continue with Illinois Email"} />
         <Image source={require("../../assets/logos/uiuc-logo.png")} style={styles.uiucLogo}/>
         

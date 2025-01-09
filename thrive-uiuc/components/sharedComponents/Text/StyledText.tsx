@@ -2,7 +2,13 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { useFonts } from "expo-font";
 
-export function StyledH1({ text, style = {}, weight = "regular" }) {
+type Props = {
+  text: string,
+  style?: Object,
+  weight?: string,
+}
+
+export function StyledH1({ text, style = {}, weight = "regular" }: Props) {
   var [fontsLoaded] = useFonts({
     MPlusRegular: require("../../../assets/fonts/mplusRegular.ttf"),
     MPlusMedium: require("../../../assets/fonts/mplusMedium.ttf"),
@@ -15,7 +21,7 @@ export function StyledH1({ text, style = {}, weight = "regular" }) {
   return <Text style={[fontStyles.styledH1, style]}>{text}</Text>;
 }
 
-export function StyledH2({ text, style = {}, weight = "medium" }) {
+export function StyledH2({ text, style = {}, weight = "medium" }: Props) {
   var [fontsLoaded] = useFonts({
     MPlusRegular: require("../../../assets/fonts/mplusRegular.ttf"),
     MPlusMedium: require("../../../assets/fonts/mplusMedium.ttf"),
@@ -34,7 +40,7 @@ export function StyledH2({ text, style = {}, weight = "medium" }) {
   );
 }
 
-export function StyledH3({ text, style = {}, weight = "regular" }) {
+export function StyledH3({ text, style = {}, weight = "regular" }: Props) {
   var [fontsLoaded] = useFonts({
     MPlusRegular: require("../../../assets/fonts/mplusRegular.ttf"),
     MPlusMedium: require("../../../assets/fonts/mplusMedium.ttf"),
@@ -47,7 +53,7 @@ export function StyledH3({ text, style = {}, weight = "regular" }) {
   return <Text style={[fontStyles.styledH3, style]}>{text}</Text>;
 }
 
-export function StyledH4({ text, style = {}, weight = "regular" }) {
+export function StyledH4({ text, style = {}, weight = "regular" }: Props) {
   var [fontsLoaded] = useFonts({
     MPlusRegular: require("../../../assets/fonts/mplusRegular.ttf"),
     MPlusMedium: require("../../../assets/fonts/mplusMedium.ttf"),

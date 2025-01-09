@@ -4,7 +4,7 @@ import React from "react";
 import { StyledH3, StyledH4 } from "../sharedComponents/Text/StyledText";
 
 type Props = {
-    label: String,
+    label: string,
     onPress: (event: GestureResponderEvent) => void;
 };
 

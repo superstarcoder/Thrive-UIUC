@@ -11,32 +11,36 @@ import MeetNewStudentsPage from "./components/MeetNewStudentsPage/MeetNewStudent
 export type Props = {};
 
 export type PageName =
-  | "auth-page"
-  | "create-profile-page"
-  | "home-page"
-  | "meet-new-students-page";
+    | "auth-page"
+    | "create-profile-page"
+    | "home-page"
+    | "meet-new-students-page";
 
 const App: FC<Props> = () => {
-  const [currentPage, setCurrentPage] = useState<PageName>("auth-page");
+    const [currentPage, setCurrentPage] = useState<PageName>("auth-page");
 
-  return (
-    <GestureHandlerRootView>
-      <View style={styles.container}>
-        {currentPage == "auth-page" && (
-          <AuthPage setCurrentPage={setCurrentPage} />
-        )}
-        {currentPage == "create-profile-page" && (
-          <CreateProfilePage setCurrentPage={setCurrentPage} />
-        )}
-        {currentPage == "home-page" && <HomePage />}
-        {currentPage == "meet-new-students-page" && <MeetNewStudentsPage />}
-      </View>
-    </GestureHandlerRootView>
-  );
+    return (
+        <GestureHandlerRootView>
+            <View style={styles.container}>
+                {currentPage == "auth-page" && (
+                    <AuthPage setCurrentPage={setCurrentPage} />
+                )}
+                {currentPage == "create-profile-page" && (
+                    <CreateProfilePage setCurrentPage={setCurrentPage} />
+                )}
+                {currentPage == "home-page" && (
+                    <HomePage setCurrentPage={setCurrentPage} />
+                )}
+                {currentPage == "meet-new-students-page" && (
+                    <MeetNewStudentsPage setCurrentPage={setCurrentPage} />
+                )}
+            </View>
+        </GestureHandlerRootView>
+    );
 };
 
 export default App;
 
 const styles = StyleSheet.create({
-  container: {},
+    container: {},
 });

@@ -12,7 +12,7 @@ const YourNetworkProfileBox = (props: Props) => {
     return (
         <View style={styles.profile}>
             <Image source={require("../../assets/logos/uiuc-logo.png")} style={styles.profileImage} />
-            <StyledH4 text={profileName} style={styles.profileText}/>
+            <StyledH4 numberOfLines={1} text={profileName} style={styles.profileText}/>
         </View>
     );
 };
@@ -22,21 +22,19 @@ export default YourNetworkProfileBox;
 const styles = StyleSheet.create({
     profile: {
         backgroundColor: Color.darkBlue,
-        width: 100,
+        width: 120,
         height: 80,
-        // marginTop: 10,
-        // marginRight: 10,
         alignItems: "center",
         justifyContent: "center",
+        borderRadius: 10
     },
     profileImage: {
         width: 25,
         height: 25,
-        // margin: 5,
         borderRadius: 10
     },
     profileText: {
-        // margin: 5,
-        textAlign: "center"
+        textAlign: "center",
     }
+
 });

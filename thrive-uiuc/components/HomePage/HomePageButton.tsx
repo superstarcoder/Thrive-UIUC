@@ -8,7 +8,7 @@ type Props = {
     onPress: (event: GestureResponderEvent) => void;
 };
 
-const Button = (props: Props) => {
+const HomePageButton = (props: Props) => {
     const { label, onPress } = props;
     return (
         <View> 
@@ -19,7 +19,7 @@ const Button = (props: Props) => {
     );
 };
 
-export default Button;
+export default HomePageButton;
 
 const styles = StyleSheet.create({
     homePageButtonText: {

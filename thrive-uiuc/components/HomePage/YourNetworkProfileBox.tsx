@@ -24,19 +24,19 @@ const styles = StyleSheet.create({
         backgroundColor: Color.darkBlue,
         width: 100,
         height: 80,
-        marginTop: 10,
-        marginRight: 10,
+        // marginTop: 10,
+        // marginRight: 10,
         alignItems: "center",
         justifyContent: "center",
     },
     profileImage: {
         width: 25,
         height: 25,
-        margin: 5,
+        // margin: 5,
         borderRadius: 10
     },
     profileText: {
-        margin: 5,
+        // margin: 5,
         textAlign: "center"
     }
 });

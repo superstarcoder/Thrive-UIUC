@@ -33,7 +33,7 @@ export default HomePage;
 
 const styles = StyleSheet.create({
     homePage: {
-
+        paddingVertical: 40,
     },
     sectionHeading: {
         marginTop: "3%"

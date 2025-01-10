@@ -79,7 +79,7 @@ export const fontStyles = {
   },
   styledH3: {
     fontFamily: "MPlusMedium",
-    fontSize: 16,
+    fontSize: 17,
     color: "white",
   },
   styledH4: {

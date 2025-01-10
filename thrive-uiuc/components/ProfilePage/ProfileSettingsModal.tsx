@@ -46,6 +46,7 @@ export type ProfileSettings = {
   introduction: string;
   hobbies: Hobby[];
 };
+
 const defaultProfileSettings: ProfileSettings = {
   name: "",
   year: null,

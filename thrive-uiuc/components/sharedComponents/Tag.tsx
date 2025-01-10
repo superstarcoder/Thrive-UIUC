@@ -34,9 +34,15 @@ type Props = {
   label: string;
   onRemoveTag?: any;
   tagDataLookupList?: TagData[] | undefined;
+  canRemove?: boolean;
 };
 
-const Tag = ({ label, onRemoveTag = () => {}, tagDataLookupList = undefined }: Props) => {
+const Tag = ({
+  label,
+  onRemoveTag = () => {},
+  tagDataLookupList = undefined,
+  canRemove = true,
+}: Props) => {
   let tagData: TagData = tagDataLookup(label, tagDataLookupList) || {
     label,
     color: Color.blue,
@@ -44,13 +50,15 @@ const Tag = ({ label, onRemoveTag = () => {}, tagDataLookupList = undefined }: P
   };
   return (
     <View style={[styles.tagContainer, { backgroundColor: tagData?.color }]}>
-      <TouchableOpacity
-        onPress={() => {
-          onRemoveTag(label);
-        }}
-      >
-        <X size={15} color="black" weight="bold" />
-      </TouchableOpacity>
+      {canRemove && (
+        <TouchableOpacity
+          onPress={() => {
+            onRemoveTag(label);
+          }}
+        >
+          <X size={15} color="black" weight="bold" />
+        </TouchableOpacity>
+      )}
       <StyledH3 text={tagData?.label} style={styles.tagLabel} />
       <StyledH3 text={"" + tagData?.emoji} style={styles.tagLabel} />
     </View>

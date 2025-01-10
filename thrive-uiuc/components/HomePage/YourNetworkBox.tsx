@@ -4,41 +4,44 @@ import YourNetworkProfileBox from "./YourNetworkProfileBox";
 
 type Props = {};
 type ItemData = {
-    id: string,
-    profileName: string
-}
+  id: string;
+  profileName: string;
+};
 
 const data: ItemData[] = [
-    {
-        id: "1",
-        profileName: "Lei"
-    },
-    {
-        id: "2",
-        profileName: "Dhanish"
-    },
-    {
-        id: "3",
-        profileName: "Harith"
-    }
-]
+  {
+    id: "1",
+    profileName: "Lei",
+  },
+  {
+    id: "2",
+    profileName: "Dhanish",
+  },
+  {
+    id: "3",
+    profileName: "Harith",
+  },
+];
 
 const YourNetworkBox = (props: Props) => {
-    return (
-        <View>
-            <FlatList
-                data={data}
-                numColumns={2}
-                renderItem={({ item }) => (
-                    <View>
-                        <YourNetworkProfileBox profileName={item.profileName} />
-                    </View>
-                )}
-            />
-        </View>
-    );
+  return (
+    <View style={styles.profileList}>
+      {data.map((item, index) => (
+        <>
+          <YourNetworkProfileBox profileName={item.profileName} key={index} />
+        </>
+      ))}
+    </View>
+  );
 };
 
 export default YourNetworkBox;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    profileList: {
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        gap: 10,
+    }
+});

@@ -2,7 +2,6 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Color from "../../styles/Color";
 import { StyledH4 } from "../sharedComponents/Text/StyledText";
-
 type Props = {
     profileName: string
 };
@@ -11,7 +10,7 @@ const YourNetworkProfileBox = (props: Props) => {
     const { profileName } = props;
     return (
         <View style={styles.profile}>
-            <Image source={require("../../assets/logos/uiuc-logo.png")} style={styles.profileImage} />
+            <Image source={require("../../assets/testing/DefaultProfileImage.jpg")} style={styles.profileImage} />
             <StyledH4 numberOfLines={1} text={profileName} style={styles.profileText}/>
         </View>
     );
@@ -26,15 +25,16 @@ const styles = StyleSheet.create({
         height: 80,
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 10
+        borderRadius: 10,
+        gap: 7
     },
     profileImage: {
-        width: 25,
-        height: 25,
-        borderRadius: 10
+        width: 35,
+        height: 35,
+        borderRadius: 50
     },
     profileText: {
         textAlign: "center",
+        paddingHorizontal: 10,
     }
-
 });

@@ -6,6 +6,7 @@ import { StyledH2, StyledH4 } from "../sharedComponents/Text/StyledText";
 import YourNetworkProfileBox from "./YourNetworkProfileBox";
 import Color from "../../styles/Color";
 import { ProfileSettings } from "../ProfilePage/ProfileSettingsModal";
+import { ScrollView } from "react-native-gesture-handler";
 type OngoingStudySessionBoxProps = {};
 
 const OngoingStudySessionsBox = (props: OngoingStudySessionBoxProps) => {
@@ -101,23 +102,27 @@ const HomePage = (props: HomePageProps) => {
     const yourNetworkHeading = "Your Network";
 
     return (
-        <View style={[sharedStyles.pageContainer, styles.homePage]}>
-            <HomePageButton label={meetNewStudentsButtonLabel} onPress={() => { setCurrentPage('meet-new-students-page') }} />
-            <HomePageButton label={startStudySessionButtonLabel} onPress={() => { setCurrentPage('meet-new-students-page') }} />
-            <StyledH2 style={styles.sectionHeading} text={ongoingStudySessionsHeading} />
-            <OngoingStudySessionsBox />
-            <StyledH2 style={styles.sectionHeading} text={yourNetworkHeading} />
-            <YourNetworkBox />
-        </View>
+        <ScrollView overScrollMode="never" contentContainerStyle={styles.scrollContainer}>
+            <View style={[sharedStyles.pageContainer, styles.homePage]}>
+                <HomePageButton label={meetNewStudentsButtonLabel} onPress={() => { setCurrentPage('meet-new-students-page') }} />
+                <HomePageButton label={startStudySessionButtonLabel} onPress={() => { setCurrentPage('meet-new-students-page') }} />
+                <StyledH2 style={styles.sectionHeading} text={ongoingStudySessionsHeading} />
+                <OngoingStudySessionsBox />
+                <StyledH2 style={styles.sectionHeading} text={yourNetworkHeading} />
+                <YourNetworkBox />
+            </View>
+        </ScrollView>
     );
 };
 
 export default HomePage;
 
 const styles = StyleSheet.create({
+    scrollContainer: {
+        backgroundColor: Color.darkestBlue
+    },
     homePage: {
         paddingVertical: 40,
-        
     },
     sectionHeading: {
         marginTop: "3%"
@@ -137,7 +142,15 @@ const styles = StyleSheet.create({
         paddingTop: 15,
         paddingBottom: 15,
         paddingLeft: 30,
-        paddingRight: 30
+        paddingRight: 30,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     ongoingStudySessionsBoxText: {
         textAlign: "center",

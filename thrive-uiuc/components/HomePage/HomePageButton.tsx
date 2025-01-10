@@ -11,9 +11,9 @@ type Props = {
 const HomePageButton = (props: Props) => {
     const { label, onPress } = props;
     return (
-        <View> 
+        <View>
             <TouchableOpacity style={sharedStyles.blueButton} onPress={onPress}>
-                <StyledH3 style={styles.homePageButtonText} text={label}/>
+                <StyledH3 style={styles.homePageButtonText} text={label} />
             </TouchableOpacity>
         </View>
     );
@@ -24,5 +24,14 @@ export default HomePageButton;
 const styles = StyleSheet.create({
     homePageButtonText: {
         color: "black",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     }
 });

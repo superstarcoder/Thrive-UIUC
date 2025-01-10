@@ -3,10 +3,10 @@ import sharedStyles from "../../styles/SharedStyles";
 import React from "react";
 import HomePageButton from "./HomePageButton";
 import { StyledH2, StyledH4 } from "../sharedComponents/Text/StyledText";
-import YourNetworkProfileBox from "./YourNetworkProfileBox";
+import ProfilePreviewBox from "./ProfilePreviewBox";
 import Color from "../../styles/Color";
-import { ProfileSettings } from "../ProfilePage/ProfileSettingsModal";
 import { ScrollView } from "react-native-gesture-handler";
+import { ProfileSettings } from "../../utils/types";
 type OngoingStudySessionBoxProps = {};
 
 const OngoingStudySessionsBox = (props: OngoingStudySessionBoxProps) => {
@@ -18,63 +18,110 @@ const OngoingStudySessionsBox = (props: OngoingStudySessionBoxProps) => {
     );
 };
 
-type ProfileData = {
-    id: string;
-    profileName: string;
-};
-
-const data: ProfileData[] = [
+const profileData: ProfileSettings[] = [
     {
         id: "1",
-        profileName: "Lei",
+        name: "Lei",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: []
     },
     {
         id: "2",
-        profileName: "Dhanish",
+        name: "Dhanish",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: []
     },
     {
         id: "3",
-        profileName: "Harith",
+        name: "Harith",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: []
     },
     {
         id: "4",
-        profileName: "Sally",
+        name: "Sally",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: [],
     },
     {
         id: "5",
-        profileName: "Joe",
+        name: "Steven",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: []
     },
     {
         id: "6",
-        profileName: "Pneumonoultramicroscopicsilicovolcanoconiosis",
+        name: "Josephine",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: []
     },
     {
         id: "7",
-        profileName: "Extremelysuperduperlongteststringtomakesurethattheoverflowstylingiscorrectfortestingpurposes",
+        name: "Extremely super duper long test string tomakesurethattheoverflowstylingiscorrectfortestingpurposes",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: []
     },
     {
         id: "8",
-        profileName: "Steven",
+        name: "Marley",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: []
     },
     {
         id: "9",
-        profileName: "Santa Claus",
+        name: "Kendrick Lamar",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: []
     },
     {
         id: "10",
-        profileName: "Jonathan",
+        name: "Peter L. Smithson",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: []
     },
     {
         id: "11",
-        profileName: "Rudy",
+        name: "Bartholomew Huckleberry",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: []
     },
     {
         id: "12",
-        profileName: "Amos",
+        name: "V",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: []
     },
     {
         id: "13",
-        profileName: "Amos",
+        name: "William",
+        year: null,
+        major: null,
+        introduction: "",
+        hobbies: []
     },
 ];
 
@@ -83,8 +130,8 @@ type YourNetworkBoxProps = {}
 const YourNetworkBox = (props: YourNetworkBoxProps) => {
     return (
         <View style={styles.profileList}>
-            {data.map((item) => (
-                <YourNetworkProfileBox profileName={item.profileName} key={item.id} />
+            {profileData.map((item) => (
+                <ProfilePreviewBox profileName={item.name} key={item.id} />
             ))}
         </View>
     );

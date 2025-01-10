@@ -11,10 +11,6 @@ export type TagData = {
   emoji: ReactNode;
 };
 
-// // temporary list of hobbies (need to make a more comprehensive list later)
-export const HOBBIES = ["biking", "baking", "badminton", "boxing"];
-export type Hobby = (typeof HOBBIES)[number];
-
 // used to pair hobbies list of labels with other styling properties for the tag (eg: color, emoji, etc)
 export const HOBBY_TAG_DATA: TagData[] = [
   { label: "biking", color: "#94A5FF", emoji: "🚴" },

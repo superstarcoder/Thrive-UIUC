@@ -6,7 +6,7 @@ type Props = {
     profileName: string
 };
 
-const YourNetworkProfileBox = (props: Props) => {
+const ProfilePreviewBox = (props: Props) => {
     const { profileName } = props;
     return (
         <View style={styles.profile}>
@@ -16,7 +16,7 @@ const YourNetworkProfileBox = (props: Props) => {
     );
 };
 
-export default YourNetworkProfileBox;
+export default ProfilePreviewBox;
 
 const styles = StyleSheet.create({
     profile: {
@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     profileText: {
-        textAlign: "center",
-        paddingHorizontal: 10,
+        textAlign: "justify",
+        paddingHorizontal: 8,
+        
     }
 });

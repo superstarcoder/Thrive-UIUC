@@ -143,8 +143,8 @@ type YourNetworkBoxProps = {}
 const YourNetworkBox = (props: YourNetworkBoxProps) => {
     return (
         <View style={styles.profileList}>
-            {profileData.map((item) => (
-                <ProfilePreviewBox profileName={item.name} key={item.id} />
+            {profileData.map((item, index) => (
+                <ProfilePreviewBox profileName={item.name} key={index} />
             ))}
         </View>
     );
@@ -179,7 +179,8 @@ export default HomePage;
 
 const styles = StyleSheet.create({
     scrollContainer: {
-        backgroundColor: Color.darkestBlue
+        backgroundColor: Color.darkestBlue,
+        minHeight: "100%",
     },
     homePage: {
         paddingVertical: 40,

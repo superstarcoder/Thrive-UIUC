@@ -12,7 +12,7 @@ const HomePageButton = (props: Props) => {
     const { label, onPress } = props;
     return (
         <View>
-            <TouchableOpacity style={sharedStyles.blueButton} onPress={onPress}>
+            <TouchableOpacity style={[sharedStyles.blueButton, { minWidth: "90%" }]} onPress={onPress}>
                 <StyledH3 style={styles.homePageButtonText} text={label} />
             </TouchableOpacity>
         </View>

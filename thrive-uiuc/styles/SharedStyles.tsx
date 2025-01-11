@@ -20,7 +20,6 @@ const sharedStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,
-    minWidth: "90%",
   }
 })
 

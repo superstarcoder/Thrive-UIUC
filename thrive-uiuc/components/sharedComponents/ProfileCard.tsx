@@ -1,22 +1,29 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { GestureResponderEvent, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { Class, Hobby, ProfileSettings, Year } from "../../utils/types";
+import { Class, Hobby, Major, ProfileSettings, Year } from "../../utils/types";
 import sharedStyles from "../../styles/SharedStyles";
-import { StyledH1, StyledH4 } from "./Text/StyledText";
+import { StyledH2, StyledH3, StyledH4 } from "./Text/StyledText";
 import Color from "../../styles/Color";
+import ClassTag from "./ClassTag";
+import Tag, { HOBBY_TAG_DATA } from "./Tag";
 
 // truncated: true (default) = introduction cut off, false = introduction fully shown
 // connectable: true (default) = connect/ignore buttons shown, false = connect/ignore buttons hidden
 type ProfileCardProps = {
-    profileSettings: ProfileSettings,
-    truncated?: boolean,
-    connectable?: boolean,
+    profileSettings: ProfileSettings;
+    truncated?: boolean;
+    connectable?: boolean;
 };
 
 const ProfileCard = ({ profileSettings, truncated = true, connectable = true }: ProfileCardProps) => {
     return (
         <View style={styles.profileCard}>
             <ProfileHeader name={profileSettings.name} year={profileSettings.year} />
+            <MajorArea major={profileSettings.major} />
+            <ClassesArea classes={profileSettings.classes} />
+            <HobbiesArea hobbies={profileSettings.hobbies} />
+            <IntroArea introduction={profileSettings.introduction} truncated={truncated} onViewFullProfilePress={() => null} />
+            {connectable && <ConnectIgnoreArea onConnectPress={() => null} onIgnorePress={() => null} />}
         </View>
     );
 };
@@ -24,8 +31,8 @@ const ProfileCard = ({ profileSettings, truncated = true, connectable = true }: 
 export default ProfileCard;
 
 type ProfileHeaderProps = {
-    name: string,
-    year: Year | null
+    name: string;
+    year: Year | null;
 }
 
 const ProfileHeader = (props: ProfileHeaderProps) => {
@@ -34,11 +41,116 @@ const ProfileHeader = (props: ProfileHeaderProps) => {
         <View style={styles.profileCardHeader}>
             <Image source={require("../../assets/testing/DefaultProfileImage.jpg")} style={styles.profileImage} />
             <View>
-                <StyledH1 text={name} />
-                <StyledH4 text={year} />
+                <StyledH2 text={name} numberOfLines={1} ellipsizeMode="tail" />
+                <StyledH4 text={year} style={styles.profileCardHeaderYearText} />
             </View>
         </View>
     )
+}
+
+type MajorAreaProps = {
+    major: Major | null;
+}
+
+const MajorArea = (props: MajorAreaProps) => {
+    const { major } = props;
+    const majorAreaLabel = "Major: "
+    return (
+        <View style={styles.profileCardMajorArea}>
+            <Text>
+                <StyledH4 text={majorAreaLabel} style={{ flex: 1 }} />
+                <StyledH4 text={major} style={styles.profileCardMajor} />
+            </Text>
+        </View>
+    )
+}
+
+type ClassesAreaProps = {
+    classes: Class[];
+}
+
+const ClassesArea = (props: ClassesAreaProps) => {
+    const { classes } = props;
+    const classesAreaLabel = "Classes: "
+    return (
+        <View style={styles.profileCardClassesArea}>
+            <View style={styles.profileCardClassesAreaList}>
+                <StyledH4 text={classesAreaLabel} style={{ paddingTop: 7 }} />
+                {classes.map((item, index) => (
+                    <ClassTag label={item} key={index} />
+                ))}
+            </View>
+        </View>
+    )
+}
+
+type HobbiesAreaProps = {
+    hobbies: Hobby[];
+}
+
+const HobbiesArea = (props: HobbiesAreaProps) => {
+    const { hobbies } = props;
+    const hobbiesAreaLabel = "Hobbies: ";
+    return (
+        <View style={styles.profileCardHobbiesArea}>
+            <View style={styles.profileCardHobbiesAreaList}>
+                <StyledH4 text={hobbiesAreaLabel} style={{ paddingTop: 7 }} />
+                {hobbies.map((item, index) => (
+                    <Tag label={item} tagDataLookupList={HOBBY_TAG_DATA} key={index} canRemove={false} textSize="H4" />
+                ))}
+            </View>
+        </View>
+    )
+}
+
+type IntroAreaProps = {
+    introduction: string;
+    truncated: boolean;
+    onViewFullProfilePress: (event: GestureResponderEvent) => void;
+}
+
+const IntroArea = (props: IntroAreaProps) => {
+    const { introduction, truncated, onViewFullProfilePress } = props;
+    const introAreaLabel = "Intro: ";
+    const viewFullProfileButtonLabel = "View Full Profile";
+
+    return (
+        <View style={styles.profileCardIntroArea}>
+            <Text numberOfLines={truncated ? 2 : 0} ellipsizeMode="tail">
+                <StyledH4 text={introAreaLabel} />
+                <StyledH4 text={introduction} style={styles.profileCardIntroAreaBodyText} />
+            </Text>
+            {truncated ? (
+                <View style={{ alignItems: "center" }}>
+                    <TouchableOpacity style={[sharedStyles.blueButton, styles.profileCardViewFullProfileButton]} onPress={onViewFullProfilePress}>
+                        <StyledH4 style={styles.profileCardViewFullProfileButtonText} text={viewFullProfileButtonLabel} />
+                    </TouchableOpacity>
+                </View>)
+                : (null)
+            }
+        </View>
+    )
+}
+
+type ConnectIgnoreAreaProps = {
+    onConnectPress: (event: GestureResponderEvent) => void;
+    onIgnorePress: (event: GestureResponderEvent) => void;
+}
+
+const ConnectIgnoreArea = (props: ConnectIgnoreAreaProps) => {
+    const { onConnectPress, onIgnorePress } = props;
+    const connectButtonLabel = "Connect";
+    const ignoreButtonLabel = "Ignore";
+    return (
+        <View style={styles.profileCardConnectIgnoreArea}>
+            <TouchableOpacity style={[sharedStyles.blueButton, { width: 100 }]} onPress={onConnectPress}>
+                <StyledH3 style={styles.profileCardConnectIgnoreButtonText} text={connectButtonLabel} />
+            </TouchableOpacity>
+            <TouchableOpacity style={[sharedStyles.blueButton, { width: 100, backgroundColor: Color.orange }]} onPress={onIgnorePress}>
+                <StyledH3 style={styles.profileCardConnectIgnoreButtonText} text={ignoreButtonLabel} />
+            </TouchableOpacity>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -46,19 +158,77 @@ const styles = StyleSheet.create({
         backgroundColor: Color.darkBlue,
         width: 300,
         borderRadius: 5,
-        gap: 10
+        gap: 7
     },
     profileCardHeader: {
-        display: "flex",
         flexDirection: "row",
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        gap: 10,
+        gap: 18,
+        marginTop: 20,
         verticalAlign: "middle"
     },
     profileImage: {
-        width: 35,
-        height: 35,
-        borderRadius: 50
+        width: 45,
+        height: 45,
+        borderRadius: 50,
+        marginLeft: 20
     },
+    profileCardHeaderYearText: {
+        marginLeft: 1,
+        color: Color.blue,
+    },
+    profileCardMajorArea: {
+        paddingHorizontal: 23,
+        flexDirection: "row",
+    },
+    profileCardMajor: {
+        color: Color.blue,
+        flex: 5
+    },
+    profileCardClassesArea: {
+        paddingLeft: 23,
+        paddingRight: 10,
+        flexDirection: "row",
+        width: "100%",
+        flexWrap: "wrap",
+    },
+    profileCardClassesAreaList: {
+        flexDirection: "row",
+        gap: 4,
+        flexWrap: "wrap"
+    },
+    profileCardHobbiesArea: {
+        paddingLeft: 23,
+        paddingRight: 10,
+        flexDirection: "row",
+        width: "100%",
+        flexWrap: "wrap",
+    },
+    profileCardHobbiesAreaList: {
+        flexDirection: "row",
+        gap: 4,
+        flexWrap: "wrap"
+    },
+    profileCardIntroArea: {
+        paddingHorizontal: 23,
+        gap: 5
+    },
+    profileCardIntroAreaBodyText: {
+        color: Color.blue,
+    },
+    profileCardViewFullProfileButton: {
+        width: 120
+    },
+    profileCardConnectIgnoreArea: {
+        flexDirection: "row",
+        gap: 7,
+        justifyContent: "center",
+        marginTop: 5,
+        marginBottom: 15
+    },
+    profileCardViewFullProfileButtonText: {
+        color: "black",
+    },
+    profileCardConnectIgnoreButtonText: {
+        color: "black",
+    }
 });

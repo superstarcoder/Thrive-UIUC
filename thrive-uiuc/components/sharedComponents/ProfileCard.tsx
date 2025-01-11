@@ -4,7 +4,6 @@ import { Class, Hobby, Major, ProfileSettings, Year } from "../../utils/types";
 import sharedStyles from "../../styles/SharedStyles";
 import { StyledH2, StyledH3, StyledH4 } from "./Text/StyledText";
 import Color from "../../styles/Color";
-import ClassTag from "./ClassTag";
 import Tag, { HOBBY_TAG_DATA } from "./Tag";
 
 // truncated: true (default) = introduction cut off, false = introduction fully shown
@@ -79,7 +78,7 @@ const ClassesArea = (props: ClassesAreaProps) => {
             <View style={styles.profileCardClassesAreaList}>
                 <StyledH4 text={classesAreaLabel} style={{ paddingTop: 7 }} />
                 {classes.map((item, index) => (
-                    <ClassTag label={item} key={index} />
+                    <Tag label={item} key={index} textSize="H4" canRemove={false}/>
                 ))}
             </View>
         </View>

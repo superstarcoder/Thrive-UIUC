@@ -11,47 +11,22 @@ import FormTextInput from "../sharedComponents/FormComponents/FormTextInput";
 import FormFieldContainer from "../sharedComponents/FormComponents/FormFieldContainer";
 import MultipleChoice from "../sharedComponents/FormComponents/MultipleChoice";
 import { ScrollView } from "react-native-gesture-handler";
-import {
-  HOBBIES,
-  Hobby,
-  TagData,
-  HOBBY_TAG_DATA,
-} from "../sharedComponents/Tag";
+import { HOBBY_TAG_DATA } from "../sharedComponents/Tag";
 import TextInputDropDown from "../sharedComponents/FormComponents/TextInputDropDown";
 import Tag from "../sharedComponents/Tag";
 import { isEqualTagData, objectMatchesAnyInArray } from "../../utils/utils";
+import { HOBBIES, Hobby, Major, MAJORS, ProfileSettings, Year, YEARS } from "../../utils/types";
 
 export type Props = {onSavePress: any};
 
-const YEARS = ["Freshman", "Sophomore", "Junior", "Senior"] as const;
-type Year = (typeof YEARS)[number];
-
-// temporary list of majors (need to make a full list later)
-export const MAJORS = [
-  "Aerospace Engineering",
-  "Bioengineering",
-  "Civil Engineering",
-  "Computer Engineering",
-  "Electrical Engineering",
-  "Mechanical Engineering",
-  "Biotechnology and Molecular Biosciences.",
-  "Computer Science & Statistics",
-];
-type Major = (typeof MAJORS)[number];
-
-export type ProfileSettings = {
-  name: string;
-  year: Year | null;
-  major: Major | null;
-  introduction: string;
-  hobbies: Hobby[];
-};
 const defaultProfileSettings: ProfileSettings = {
+  id: "",
   name: "",
   year: null,
   major: null,
   introduction: "",
   hobbies: [],
+  classes: []
 };
 
 const ProfileSettingsModal = ({onSavePress}: Props) => {

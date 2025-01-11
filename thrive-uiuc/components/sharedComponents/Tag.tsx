@@ -11,10 +11,6 @@ export type TagData = {
   emoji: ReactNode;
 };
 
-// // temporary list of hobbies (need to make a more comprehensive list later)
-export const HOBBIES = ["biking", "baking", "badminton", "boxing"];
-export type Hobby = (typeof HOBBIES)[number];
-
 // used to pair hobbies list of labels with other styling properties for the tag (eg: color, emoji, etc)
 export const HOBBY_TAG_DATA: TagData[] = [
   { label: "biking", color: "#94A5FF", emoji: "🚴" },
@@ -34,9 +30,15 @@ type Props = {
   label: string;
   onRemoveTag?: any;
   tagDataLookupList?: TagData[] | undefined;
+  canRemove?: boolean;
 };
 
-const Tag = ({ label, onRemoveTag = () => {}, tagDataLookupList = undefined }: Props) => {
+const Tag = ({
+  label,
+  onRemoveTag = () => {},
+  tagDataLookupList = undefined,
+  canRemove = true,
+}: Props) => {
   let tagData: TagData = tagDataLookup(label, tagDataLookupList) || {
     label,
     color: Color.blue,
@@ -44,13 +46,15 @@ const Tag = ({ label, onRemoveTag = () => {}, tagDataLookupList = undefined }: P
   };
   return (
     <View style={[styles.tagContainer, { backgroundColor: tagData?.color }]}>
-      <TouchableOpacity
-        onPress={() => {
-          onRemoveTag(label);
-        }}
-      >
-        <X size={15} color="black" weight="bold" />
-      </TouchableOpacity>
+      {canRemove && (
+        <TouchableOpacity
+          onPress={() => {
+            onRemoveTag(label);
+          }}
+        >
+          <X size={15} color="black" weight="bold" />
+        </TouchableOpacity>
+      )}
       <StyledH3 text={tagData?.label} style={styles.tagLabel} />
       <StyledH3 text={"" + tagData?.emoji} style={styles.tagLabel} />
     </View>

@@ -18,12 +18,14 @@ type ProfileCardProps = {
 const ProfileCard = ({ profileSettings, truncated = true, connectable = true }: ProfileCardProps) => {
     return (
         <View style={styles.profileCard}>
-            <ProfileHeader name={profileSettings.name} year={profileSettings.year} />
-            <MajorArea major={profileSettings.major} />
-            <ClassesArea classes={profileSettings.classes} />
-            <HobbiesArea hobbies={profileSettings.hobbies} />
-            <IntroArea introduction={profileSettings.introduction} truncated={truncated} onViewFullProfilePress={() => null} />
-            {connectable && <ConnectIgnoreArea onConnectPress={() => null} onIgnorePress={() => null} />}
+            <View style={styles.profileDetails}>
+                <ProfileHeader name={profileSettings.name} year={profileSettings.year} />
+                <MajorArea major={profileSettings.major} />
+                <ClassesArea classes={profileSettings.classes} />
+                <HobbiesArea hobbies={profileSettings.hobbies} />
+                <IntroArea introduction={profileSettings.introduction} truncated={truncated} onViewFullProfilePress={() => null} />
+                {connectable && <ConnectIgnoreArea onConnectPress={() => null} onIgnorePress={() => null} />}
+            </View>
         </View>
     );
 };
@@ -158,7 +160,10 @@ const styles = StyleSheet.create({
         backgroundColor: Color.darkBlue,
         width: 300,
         borderRadius: 5,
-        gap: 7
+    },
+    profileDetails: {
+        marginBottom: 15,
+        gap: 5,
     },
     profileCardHeader: {
         flexDirection: "row",
@@ -177,6 +182,7 @@ const styles = StyleSheet.create({
         color: Color.blue,
     },
     profileCardMajorArea: {
+        marginTop: 8,
         paddingHorizontal: 23,
         flexDirection: "row",
     },
@@ -193,7 +199,7 @@ const styles = StyleSheet.create({
     },
     profileCardClassesAreaList: {
         flexDirection: "row",
-        gap: 4,
+        gap: 3,
         flexWrap: "wrap"
     },
     profileCardHobbiesArea: {
@@ -205,12 +211,13 @@ const styles = StyleSheet.create({
     },
     profileCardHobbiesAreaList: {
         flexDirection: "row",
-        gap: 4,
+        gap: 3,
         flexWrap: "wrap"
     },
     profileCardIntroArea: {
         paddingHorizontal: 23,
-        gap: 5
+        gap: 9,
+        marginBottom: 5
     },
     profileCardIntroAreaBodyText: {
         color: Color.blue,
@@ -223,7 +230,7 @@ const styles = StyleSheet.create({
         gap: 7,
         justifyContent: "center",
         marginTop: 5,
-        marginBottom: 15
+        marginBottom: 7
     },
     profileCardViewFullProfileButtonText: {
         color: "black",

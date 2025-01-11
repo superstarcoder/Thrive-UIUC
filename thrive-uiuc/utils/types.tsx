@@ -1,4 +1,3 @@
-// temporary list of hobbies (need to make a more comprehensive list later)
 export const HOBBIES = ["biking", "baking", "badminton", "boxing"];
 export type Hobby = (typeof HOBBIES)[number];
 
@@ -15,7 +14,7 @@ export const MAJORS = [
   "Computer Engineering",
   "Electrical Engineering",
   "Mechanical Engineering",
-  "Biotechnology and Molecular Biosciences.",
+  "Biotechnology and Molecular Biosciences",
   "Computer Science & Statistics",
 ];
 export type Major = (typeof MAJORS)[number];
@@ -27,4 +26,5 @@ export type ProfileSettings = {
     major: Major | null;
     introduction: string;
     hobbies: Hobby[];
+    classes: Class[];
 };

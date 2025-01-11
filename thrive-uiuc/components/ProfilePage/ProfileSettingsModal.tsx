@@ -26,6 +26,7 @@ const defaultProfileSettings: ProfileSettings = {
   major: null,
   introduction: "",
   hobbies: [],
+  classes: []
 };
 
 const ProfileSettingsModal = ({onSavePress}: Props) => {

@@ -25,7 +25,8 @@ const profileData: ProfileSettings[] = [
         year: null,
         major: null,
         introduction: "",
-        hobbies: []
+        hobbies: [],
+        classes: []
     },
     {
         id: "2",
@@ -33,7 +34,8 @@ const profileData: ProfileSettings[] = [
         year: null,
         major: null,
         introduction: "",
-        hobbies: []
+        hobbies: [],
+        classes: []
     },
     {
         id: "3",
@@ -41,7 +43,8 @@ const profileData: ProfileSettings[] = [
         year: null,
         major: null,
         introduction: "",
-        hobbies: []
+        hobbies: [],
+        classes: []
     },
     {
         id: "4",
@@ -50,6 +53,7 @@ const profileData: ProfileSettings[] = [
         major: null,
         introduction: "",
         hobbies: [],
+        classes: []
     },
     {
         id: "5",
@@ -57,7 +61,8 @@ const profileData: ProfileSettings[] = [
         year: null,
         major: null,
         introduction: "",
-        hobbies: []
+        hobbies: [],
+        classes: []
     },
     {
         id: "6",
@@ -65,7 +70,8 @@ const profileData: ProfileSettings[] = [
         year: null,
         major: null,
         introduction: "",
-        hobbies: []
+        hobbies: [],
+        classes: []
     },
     {
         id: "7",
@@ -73,7 +79,8 @@ const profileData: ProfileSettings[] = [
         year: null,
         major: null,
         introduction: "",
-        hobbies: []
+        hobbies: [],
+        classes: []
     },
     {
         id: "8",
@@ -81,7 +88,8 @@ const profileData: ProfileSettings[] = [
         year: null,
         major: null,
         introduction: "",
-        hobbies: []
+        hobbies: [],
+        classes: []
     },
     {
         id: "9",
@@ -89,7 +97,8 @@ const profileData: ProfileSettings[] = [
         year: null,
         major: null,
         introduction: "",
-        hobbies: []
+        hobbies: [],
+        classes: []
     },
     {
         id: "10",
@@ -97,7 +106,8 @@ const profileData: ProfileSettings[] = [
         year: null,
         major: null,
         introduction: "",
-        hobbies: []
+        hobbies: [],
+        classes: []
     },
     {
         id: "11",
@@ -105,7 +115,8 @@ const profileData: ProfileSettings[] = [
         year: null,
         major: null,
         introduction: "",
-        hobbies: []
+        hobbies: [],
+        classes: []
     },
     {
         id: "12",
@@ -113,7 +124,8 @@ const profileData: ProfileSettings[] = [
         year: null,
         major: null,
         introduction: "",
-        hobbies: []
+        hobbies: [],
+        classes: []
     },
     {
         id: "13",
@@ -121,7 +133,8 @@ const profileData: ProfileSettings[] = [
         year: null,
         major: null,
         introduction: "",
-        hobbies: []
+        hobbies: [],
+        classes: []
     },
 ];
 

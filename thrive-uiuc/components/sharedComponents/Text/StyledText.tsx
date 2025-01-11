@@ -3,7 +3,7 @@ import React from "react";
 import { useFonts } from "expo-font";
 
 type Props = {
-    text: string,
+    text: string | null,
     style?: Object,
     weight?: string,
     numberOfLines?: number,

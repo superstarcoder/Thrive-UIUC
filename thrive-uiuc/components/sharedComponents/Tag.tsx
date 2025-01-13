@@ -19,10 +19,7 @@ export const HOBBY_TAG_DATA: TagData[] = [
   { label: "boxing", color: "#FFC994", emoji: "🥊" },
 ];
 
-export const tagDataLookup = (
-  label: string,
-  tagDataLookupList: TagData[] | undefined
-) => {
+export const tagDataLookup = (label: string, tagDataLookupList: TagData[] | undefined) => {
   return tagDataLookupList?.find((obj) => obj.label == label);
 };
 
@@ -59,9 +56,7 @@ const Tag = ({
       )}
       <Text>
         <TextComponent text={tagData?.label} style={styles.tagLabel} />
-        {tagData.emoji && (
-          <TextComponent text={" " + tagData?.emoji} style={styles.tagLabel} />
-        )}
+        {tagData.emoji && <TextComponent text={" " + tagData?.emoji} style={styles.tagLabel} />}
       </Text>
     </View>
   );

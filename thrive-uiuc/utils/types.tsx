@@ -20,11 +20,11 @@ export const MAJORS = [
 export type Major = (typeof MAJORS)[number];
 
 export type ProfileSettings = {
-    id: string;
-    name: string;
-    year: Year | null;
-    major: Major | null;
-    introduction: string;
-    hobbies: Hobby[];
-    classes: Class[];
+  id: string;
+  name: string;
+  year: Year | null;
+  major: Major | null;
+  introduction: string;
+  hobbies: Hobby[];
+  classes: Class[];
 };

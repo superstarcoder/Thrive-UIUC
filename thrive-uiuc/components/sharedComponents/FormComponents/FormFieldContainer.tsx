@@ -3,15 +3,11 @@ import React, { ReactNode } from "react";
 import Color from "../../../styles/Color";
 
 type Props = {
-  children: ReactNode
+  children: ReactNode;
 };
 
-const FormFieldContainer = ({children}: Props) => {
-  return (
-    <View style={styles.formFieldContainerStyle}>
-      {children}
-    </View>
-  );
+const FormFieldContainer = ({ children }: Props) => {
+  return <View style={styles.formFieldContainerStyle}>{children}</View>;
 };
 
 export default FormFieldContainer;
@@ -24,6 +20,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 20,
     borderRadius: 20,
-    gap: 7
-  }
+    gap: 7,
+  },
 });

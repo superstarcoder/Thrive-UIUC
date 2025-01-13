@@ -1,10 +1,4 @@
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import FormTextInput from "./FormTextInput";
 import Tag, { HOBBY_TAG_DATA, TagData, tagDataLookup } from "../Tag";
@@ -20,18 +14,12 @@ const calculateSimilarity = (input: string, option: string): number => {
 };
 
 // Function to filter and sort the tags
-const filterTags = (
-  newText: string,
-  allTagLabels: string[],
-  selectedTagLabels: string[]
-): string[] => {
+const filterTags = (newText: string, allTagLabels: string[], selectedTagLabels: string[]): string[] => {
   if (!newText) return [];
 
   const lowercaseInput = newText.toLowerCase();
   // Create a set of selected tags for faster lookup
-  const selectedSet = new Set(
-    selectedTagLabels.map((tag) => tag.toLowerCase())
-  );
+  const selectedSet = new Set(selectedTagLabels.map((tag) => tag.toLowerCase()));
 
   return allTagLabels
     .filter((tag) => !selectedSet.has(tag.toLowerCase())) // Exclude selected tags
@@ -71,11 +59,7 @@ const TextInputDropDown = ({
   return (
     <View style={styles.container}>
       <View>
-        <FormTextInput
-          onChangeText={onChangeText}
-          placeholderText="type here"
-          text={textInputString}
-        />
+        <FormTextInput onChangeText={onChangeText} placeholderText="type here" text={textInputString} />
         <ScrollView style={styles.dropdownContainer}>
           {filteredTags.length > 0 && (
             <View style={styles.dropdown}>
@@ -100,12 +84,8 @@ const TextInputDropDown = ({
                   }}
                 >
                   <StyledH3 style={styles.optionText} text={item} />
-                  {tagDataLookup(item, tagDataLookupList)?.emoji !=
-                    undefined && (
-                    <StyledH3
-                      style={styles.optionText}
-                      text={"" + tagDataLookup(item, tagDataLookupList)?.emoji}
-                    />
+                  {tagDataLookup(item, tagDataLookupList)?.emoji != undefined && (
+                    <StyledH3 style={styles.optionText} text={"" + tagDataLookup(item, tagDataLookupList)?.emoji} />
                   )}
                 </TouchableOpacity>
               ))}
@@ -118,12 +98,7 @@ const TextInputDropDown = ({
         {selectedTagLabels.length > 0 && (
           <>
             {selectedTagLabels.map((tagLabel) => (
-              <Tag
-                label={tagLabel}
-                tagDataLookupList={tagDataLookupList}
-                onRemoveTag={onRemoveTag}
-                key={tagLabel}
-              />
+              <Tag label={tagLabel} tagDataLookupList={tagDataLookupList} onRemoveTag={onRemoveTag} key={tagLabel} />
             ))}
           </>
         )}
@@ -157,9 +132,7 @@ const styles = StyleSheet.create({
     gap: dropdownOptionsGap,
   },
   dropdownContainer: {
-    maxHeight:
-      optionHeight * numOptionsDisplayed +
-      dropdownOptionsGap * (numOptionsDisplayed - 1),
+    maxHeight: optionHeight * numOptionsDisplayed + dropdownOptionsGap * (numOptionsDisplayed - 1),
   },
   tagsContainer: {
     flexWrap: "wrap",

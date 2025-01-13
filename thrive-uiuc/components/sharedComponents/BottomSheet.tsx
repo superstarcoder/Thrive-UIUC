@@ -1,10 +1,5 @@
 import { StyleSheet, View, Text, Dimensions } from "react-native";
-import React, {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-} from "react";
+import React, { ReactNode, useCallback, useEffect, useImperativeHandle } from "react";
 import Color from "../../styles/Color";
 import { GestureDetector, Gesture } from "react-native-gesture-handler";
 import Animated, {
@@ -29,14 +24,8 @@ type Props = {
 
 const BottomSheet = React.forwardRef(
   (
-    {
-      children,
-      includeLine = true,
-      customStyle,
-      clamps = [0, 0.6, 1],
-      scrollingEnabled = true,
-    }: Props,
-    bottomSheetRef
+    { children, includeLine = true, customStyle, clamps = [0, 0.6, 1], scrollingEnabled = true }: Props,
+    bottomSheetRef,
   ) => {
     const translateY = useSharedValue(0);
     const active = useSharedValue(false);
@@ -60,10 +49,7 @@ const BottomSheet = React.forwardRef(
 
     // 2nd arg: return object with scrollTo
     // 3rd arg: return dependencies
-    useImperativeHandle(bottomSheetRef, () => ({ scrollTo, isActive }), [
-      scrollTo,
-      isActive,
-    ]);
+    useImperativeHandle(bottomSheetRef, () => ({ scrollTo, isActive }), [scrollTo, isActive]);
 
     // useEffect(() => {
     //   scrollTo(0.3)
@@ -83,17 +69,12 @@ const BottomSheet = React.forwardRef(
         if (scrollingEnabled) {
           let distanceFromClamp = [];
           for (const clamp of clamps) {
-            distanceFromClamp.push(
-              Math.abs(translateY.value - MAX_TRANSLATE_Y * clamp)
-            );
+            distanceFromClamp.push(Math.abs(translateY.value - MAX_TRANSLATE_Y * clamp));
           }
-          let indexOfClamp = distanceFromClamp.indexOf(
-            Math.min(...distanceFromClamp)
-          );
+          let indexOfClamp = distanceFromClamp.indexOf(Math.min(...distanceFromClamp));
           let clampTo = clamps[indexOfClamp];
           scrollTo(clampTo);
         }
-
       });
 
     const rBottomSheetStyle = useAnimatedStyle(() => {
@@ -101,7 +82,7 @@ const BottomSheet = React.forwardRef(
         translateY.value,
         [MAX_TRANSLATE_Y + 50, MAX_TRANSLATE_Y],
         [25, 5],
-        Extrapolate.CLAMP
+        Extrapolate.CLAMP,
       );
       return {
         borderRadius,
@@ -111,15 +92,13 @@ const BottomSheet = React.forwardRef(
 
     return (
       <GestureDetector gesture={gesture}>
-        <Animated.View
-          style={[styles.bottomSheetContainer, customStyle, rBottomSheetStyle]}
-        >
+        <Animated.View style={[styles.bottomSheetContainer, customStyle, rBottomSheetStyle]}>
           {includeLine && <View style={styles.line} />}
           {children}
         </Animated.View>
       </GestureDetector>
     );
-  }
+  },
 );
 
 export default BottomSheet;

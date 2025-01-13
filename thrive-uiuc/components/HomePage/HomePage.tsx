@@ -2,11 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import sharedStyles from "../../styles/SharedStyles";
 import React from "react";
 import HomePageButton from "./HomePageButton";
-import {
-  StyledH2,
-  StyledH3,
-  StyledH4,
-} from "../sharedComponents/Text/StyledText";
+import { StyledH2, StyledH3, StyledH4 } from "../sharedComponents/Text/StyledText";
 import ProfilePreviewBox from "./ProfilePreviewBox";
 import Color from "../../styles/Color";
 import { ScrollView } from "react-native-gesture-handler";
@@ -144,10 +140,7 @@ const HomePage = (props: HomePageProps) => {
   const yourNetworkHeading = "Your Network";
 
   return (
-    <ScrollView
-      overScrollMode="never"
-      contentContainerStyle={styles.scrollContainer}
-    >
+    <ScrollView overScrollMode="never" contentContainerStyle={styles.scrollContainer}>
       <View style={[sharedStyles.pageContainer, styles.homePage]}>
         <View style={styles.homePageButtons}>
           <HomePageButton
@@ -163,10 +156,7 @@ const HomePage = (props: HomePageProps) => {
             }}
           />
         </View>
-        <StyledH2
-          style={styles.sectionHeading}
-          text={ongoingStudySessionsHeading}
-        />
+        <StyledH2 style={styles.sectionHeading} text={ongoingStudySessionsHeading} />
         <OngoingStudySessionsBox />
         <StyledH2 style={styles.sectionHeading} text={yourNetworkHeading} />
         <YourNetworkBox />

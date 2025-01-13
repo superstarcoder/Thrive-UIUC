@@ -4,33 +4,36 @@ import React from "react";
 import { StyledH2, StyledH3, StyledH4 } from "../sharedComponents/Text/StyledText";
 
 type Props = {
-    label: string,
-    onPress: (event: GestureResponderEvent) => void;
+  label: string;
+  onPress: (event: GestureResponderEvent) => void;
 };
 
 const HomePageButton = (props: Props) => {
-    const { label, onPress } = props;
-    return (
-        <View>
-            <TouchableOpacity style={sharedStyles.blueButton} onPress={onPress}>
-                <StyledH3 style={styles.homePageButtonText} text={label} />
-            </TouchableOpacity>
-        </View>
-    );
+  const { label, onPress } = props;
+  return (
+    <View style={{ minWidth: "90%", alignItems: "center" }}>
+      <TouchableOpacity style={[sharedStyles.blueButton, styles.homePageButton]} onPress={onPress}>
+        <StyledH3 style={styles.homePageButtonText} text={label} />
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 export default HomePageButton;
 
 const styles = StyleSheet.create({
-    homePageButtonText: {
-        color: "black",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    }
+  homePageButtonText: {
+    color: "black",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  homePageButton: {
+    minWidth: "90%",
+  },
 });

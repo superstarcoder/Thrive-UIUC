@@ -2,8 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { StyledH2, StyledH3 } from "../Text/StyledText";
 import Color from "../../../styles/Color";
-import { Check, CheckSquare, Square } from 'phosphor-react-native';
-
+import { Check, CheckSquare, Square } from "phosphor-react-native";
 
 type Props = {
   options: string[];
@@ -15,11 +14,7 @@ const MultipleChoice = ({ options, onSelect, selectedOption }: Props) => {
   return (
     <View style={styles.multipleChoiceContainer}>
       {options.map((option, index) => (
-        <TouchableOpacity
-          key={index}
-          onPress={() => onSelect(option)}
-          style={styles.selectionOption}
-        >
+        <TouchableOpacity key={index} onPress={() => onSelect(option)} style={styles.selectionOption}>
           {selectedOption === option ? (
             <CheckSquare size={25} color={Color.lightgray} weight="fill" />
           ) : (

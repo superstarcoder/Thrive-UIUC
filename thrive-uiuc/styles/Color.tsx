@@ -4,7 +4,6 @@ const darkBlue = "#252F68";
 const grayBlue = "#252B55";
 const gray = "#393E62";
 
-
 // variety of colors
 const blue = "#94A5FF";
 const purple = "#A494FF";
@@ -22,7 +21,7 @@ const Color = {
   purple,
   orange,
   yellow,
-  lightgray
+  lightgray,
 };
 
 export default Color;

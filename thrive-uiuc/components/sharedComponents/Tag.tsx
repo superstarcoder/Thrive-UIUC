@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { StyledH3 } from "./Text/StyledText";
+import { StyledH1, StyledH2, StyledH3, StyledH4 } from "./Text/StyledText";
 import { X } from "phosphor-react-native";
 import Color from "../../styles/Color";
 
@@ -19,10 +19,7 @@ export const HOBBY_TAG_DATA: TagData[] = [
   { label: "boxing", color: "#FFC994", emoji: "🥊" },
 ];
 
-export const tagDataLookup = (
-  label: string,
-  tagDataLookupList: TagData[] | undefined
-) => {
+export const tagDataLookup = (label: string, tagDataLookupList: TagData[] | undefined) => {
   return tagDataLookupList?.find((obj) => obj.label == label);
 };
 
@@ -31,6 +28,7 @@ type Props = {
   onRemoveTag?: any;
   tagDataLookupList?: TagData[] | undefined;
   canRemove?: boolean;
+  TextComponent?: any;
 };
 
 const Tag = ({
@@ -38,6 +36,7 @@ const Tag = ({
   onRemoveTag = () => {},
   tagDataLookupList = undefined,
   canRemove = true,
+  TextComponent = StyledH3,
 }: Props) => {
   let tagData: TagData = tagDataLookup(label, tagDataLookupList) || {
     label,
@@ -52,11 +51,13 @@ const Tag = ({
             onRemoveTag(label);
           }}
         >
-          <X size={15} color="black" weight="bold" />
+          <X size={10} color="black" weight="bold" />
         </TouchableOpacity>
       )}
-      <StyledH3 text={tagData?.label} style={styles.tagLabel} />
-      <StyledH3 text={"" + tagData?.emoji} style={styles.tagLabel} />
+      <Text>
+        <TextComponent text={tagData?.label} style={styles.tagLabel} />
+        {tagData.emoji && <TextComponent text={" " + tagData?.emoji} style={styles.tagLabel} />}
+      </Text>
     </View>
   );
 };
@@ -71,8 +72,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 5,
     alignItems: "center",
-    height: 30,
+    // height: 30,
+    paddingVertical: 4,
   },
+
   tagLabel: {
     color: "black",
   },

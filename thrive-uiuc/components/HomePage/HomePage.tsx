@@ -7,6 +7,7 @@ import ProfilePreviewBox from "./ProfilePreviewBox";
 import Color from "../../styles/Color";
 import { ScrollView } from "react-native-gesture-handler";
 import { ProfileSettings } from "../../utils/types";
+import { Shadow } from "react-native-shadow-2";
 type OngoingStudySessionBoxProps = {};
 
 const OngoingStudySessionsBox = (props: OngoingStudySessionBoxProps) => {

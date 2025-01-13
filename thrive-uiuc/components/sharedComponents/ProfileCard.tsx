@@ -222,7 +222,8 @@ const styles = StyleSheet.create({
         color: Color.blue,
     },
     profileCardViewFullProfileButton: {
-        width: 120
+        width: 120,
+        boxShadow: "0px 0px 0px 0px rgba(255,255,255,0.3)",
     },
     profileCardConnectIgnoreArea: {
         flexDirection: "row",

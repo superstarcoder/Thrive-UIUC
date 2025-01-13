@@ -64,5 +64,6 @@ const styles = StyleSheet.create({
     },
     meetNewStudentsPage: {
         gap: 15,
+        marginBottom: 30
     }
 })

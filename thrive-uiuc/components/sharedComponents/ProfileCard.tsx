@@ -78,7 +78,7 @@ const ClassesArea = (props: ClassesAreaProps) => {
             <View style={styles.profileCardClassesAreaList}>
                 <StyledH4 text={classesAreaLabel} style={{ paddingTop: 7 }} />
                 {classes.map((item, index) => (
-                    <Tag label={item} key={index} textSize="H4" canRemove={false}/>
+                    <Tag label={item} key={index} TextComponent={StyledH4} canRemove={false}/>
                 ))}
             </View>
         </View>
@@ -97,7 +97,7 @@ const HobbiesArea = (props: HobbiesAreaProps) => {
             <View style={styles.profileCardHobbiesAreaList}>
                 <StyledH4 text={hobbiesAreaLabel} style={{ paddingTop: 7 }} />
                 {hobbies.map((item, index) => (
-                    <Tag label={item} tagDataLookupList={HOBBY_TAG_DATA} key={index} canRemove={false} textSize="H4" />
+                    <Tag label={item} tagDataLookupList={HOBBY_TAG_DATA} key={index} canRemove={false} TextComponent={StyledH4} />
                 ))}
             </View>
         </View>
@@ -144,10 +144,10 @@ const ConnectIgnoreArea = (props: ConnectIgnoreAreaProps) => {
     const ignoreButtonLabel = "Ignore";
     return (
         <View style={styles.profileCardConnectIgnoreArea}>
-            <TouchableOpacity style={[sharedStyles.blueButton, { width: 100 }]} onPress={onConnectPress}>
+            <TouchableOpacity style={[sharedStyles.blueButton, { minWidth: 100 }]} onPress={onConnectPress}>
                 <StyledH3 style={styles.profileCardConnectIgnoreButtonText} text={connectButtonLabel} />
             </TouchableOpacity>
-            <TouchableOpacity style={[sharedStyles.blueButton, { width: 100, backgroundColor: Color.orange }]} onPress={onIgnorePress}>
+            <TouchableOpacity style={[sharedStyles.blueButton, { minWidth: 100, paddingHorizontal: 20, backgroundColor: Color.orange }]} onPress={onIgnorePress}>
                 <StyledH3 style={styles.profileCardConnectIgnoreButtonText} text={ignoreButtonLabel} />
             </TouchableOpacity>
         </View>
@@ -157,8 +157,7 @@ const ConnectIgnoreArea = (props: ConnectIgnoreAreaProps) => {
 const styles = StyleSheet.create({
     profileCard: {
         backgroundColor: Color.darkBlue,
-        width: 300,
-        borderRadius: 5,
+        borderRadius: 17,
     },
     profileDetails: {
         marginBottom: 15,

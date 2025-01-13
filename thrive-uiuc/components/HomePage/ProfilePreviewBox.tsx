@@ -20,13 +20,13 @@ export default ProfilePreviewBox;
 
 const styles = StyleSheet.create({
     profile: {
+        width: "40%",
+        paddingVertical: 20,
         backgroundColor: Color.darkBlue,
-        width: 120,
-        height: 80,
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 10,
-        gap: 7
+        gap: 7,
     },
     profileImage: {
         width: 35,

@@ -1,11 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  KeyboardAvoidingView,
-  Platform,
-} from "react-native";
+import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, Platform } from "react-native";
 import { StyledH1, fontStyles } from "../Text/StyledText";
 import { useFonts } from "expo-font";
 import React, { useState, forwardRef, useImperativeHandle } from "react";

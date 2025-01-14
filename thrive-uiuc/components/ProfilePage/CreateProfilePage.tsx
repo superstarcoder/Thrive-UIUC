@@ -3,13 +3,17 @@ import React from "react";
 import ProfileSettingsModal from "./ProfileSettingsModal";
 
 type Props = {
-  setCurrentPage: any
-}
+  setCurrentPage: any;
+};
 
-const CreateProfilePage = ({setCurrentPage}: Props) => {
+const CreateProfilePage = ({ setCurrentPage }: Props) => {
   return (
     <>
-      <ProfileSettingsModal onSavePress={() => {setCurrentPage("home-page")}}/>
+      <ProfileSettingsModal
+        onSavePress={() => {
+          setCurrentPage("home-page");
+        }}
+      />
     </>
   );
 };

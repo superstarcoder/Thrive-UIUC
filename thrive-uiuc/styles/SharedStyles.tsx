@@ -9,7 +9,7 @@ const sharedStyles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "flex-start",
     gap: 10,
-    paddingTop: "15%"
+    paddingTop: "15%",
   },
   blueButton: {
     backgroundColor: Color.blue,
@@ -20,8 +20,8 @@ const sharedStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,
-    boxShadow: "0px 0px 15px 0px rgba(255,255,255,0.5)",
-  }
-})
+    boxShadow: "0px 0px 15px 0px rgba(255,255,255,0.3)",
+  },
+});
 
 export default sharedStyles;

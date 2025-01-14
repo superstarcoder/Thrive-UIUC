@@ -2,11 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import BottomSheet from "../sharedComponents/BottomSheet";
 import Color from "../../styles/Color";
-import {
-  StyledH1,
-  StyledH2,
-  StyledH4,
-} from "../sharedComponents/Text/StyledText";
+import { StyledH1, StyledH2, StyledH4 } from "../sharedComponents/Text/StyledText";
 import FormTextInput from "../sharedComponents/FormComponents/FormTextInput";
 import FormFieldContainer from "../sharedComponents/FormComponents/FormFieldContainer";
 import MultipleChoice from "../sharedComponents/FormComponents/MultipleChoice";
@@ -17,7 +13,7 @@ import Tag from "../sharedComponents/Tag";
 import { isEqualTagData, objectMatchesAnyInArray } from "../../utils/utils";
 import { HOBBIES, Hobby, Major, MAJORS, ProfileSettings, Year, YEARS } from "../../utils/types";
 
-export type Props = {onSavePress: any};
+export type Props = { onSavePress: any };
 
 const defaultProfileSettings: ProfileSettings = {
   id: "",
@@ -26,23 +22,18 @@ const defaultProfileSettings: ProfileSettings = {
   major: null,
   introduction: "",
   hobbies: [],
-  classes: []
+  classes: [],
 };
 
-const ProfileSettingsModal = ({onSavePress}: Props) => {
+const ProfileSettingsModal = ({ onSavePress }: Props) => {
   const bottomSheetRef: any = useRef(null);
-  const [profileSettings, setProfileSettings] = useState<ProfileSettings>(
-    defaultProfileSettings
-  );
+  const [profileSettings, setProfileSettings] = useState<ProfileSettings>(defaultProfileSettings);
 
-  const updateName = (newName: string) =>
-    setProfileSettings((prev) => ({ ...prev, name: newName }));
+  const updateName = (newName: string) => setProfileSettings((prev) => ({ ...prev, name: newName }));
 
-  const updateYear = (newYear: Year | null) =>
-    setProfileSettings((prev) => ({ ...prev, year: newYear }));
+  const updateYear = (newYear: Year | null) => setProfileSettings((prev) => ({ ...prev, year: newYear }));
 
-  const updateMajor = (newMajor: Major | null) =>
-    setProfileSettings((prev) => ({ ...prev, major: newMajor }));
+  const updateMajor = (newMajor: Major | null) => setProfileSettings((prev) => ({ ...prev, major: newMajor }));
 
   const deleteMajor = (major: Major | null) =>
     setProfileSettings((prev) => ({
@@ -123,11 +114,7 @@ const ProfileSettingsModal = ({onSavePress}: Props) => {
                 isMultiselect={false}
                 onAddTag={updateMajor}
                 onRemoveTag={deleteMajor}
-                selectedTagLabels={
-                  profileSettings.major !== null
-                    ? [profileSettings.major ?? ""]
-                    : []
-                }
+                selectedTagLabels={profileSettings.major !== null ? [profileSettings.major ?? ""] : []}
                 allTagLabels={MAJORS}
               />
             </FormFieldContainer>

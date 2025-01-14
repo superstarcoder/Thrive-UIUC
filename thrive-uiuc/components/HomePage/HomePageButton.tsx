@@ -1,8 +1,7 @@
 import { GestureResponderEvent, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import sharedStyles, { ShadowPresets } from "../../styles/SharedStyles";
+import sharedStyles from "../../styles/SharedStyles";
 import React from "react";
 import { StyledH2, StyledH3, StyledH4 } from "../sharedComponents/Text/StyledText";
-import { Shadow } from "react-native-shadow-2";
 
 type Props = {
     label: string,

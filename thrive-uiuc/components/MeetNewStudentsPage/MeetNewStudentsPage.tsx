@@ -6,6 +6,7 @@ import { ProfileSettings } from "../../utils/types";
 import sharedStyles from "../../styles/SharedStyles";
 import Color from "../../styles/Color";
 import { StyledH1 } from "../sharedComponents/Text/StyledText";
+import NavBar from "../sharedComponents/NavBar";
 
 type Props = {
   setCurrentPage: any;
@@ -45,16 +46,20 @@ const profiles: ProfileSettings[] = [
 ];
 
 const MeetNewStudentsPage = (props: Props) => {
+  const { setCurrentPage } = props;
   const meetNewStudentsPageHeading = "Meet New Students";
   return (
-    <ScrollView overScrollMode="never" contentContainerStyle={styles.scrollContainer}>
-      <View style={[sharedStyles.pageContainer, styles.meetNewStudentsPage]}>
-        <StyledH1 text={meetNewStudentsPageHeading} style={{ textAlign: "center" }} />
-        {profiles.map((item, index) => (
-          <ProfileCard profileSettings={item} key={index} />
-        ))}
-      </View>
-    </ScrollView>
+    <View>
+      <ScrollView overScrollMode="never" contentContainerStyle={styles.scrollContainer}>
+        <View style={[sharedStyles.pageContainer, styles.meetNewStudentsPage]}>
+          <StyledH1 text={meetNewStudentsPageHeading} style={{ textAlign: "center" }} />
+          {profiles.map((item, index) => (
+            <ProfileCard profileSettings={item} key={index} />
+          ))}
+        </View>
+      </ScrollView>
+      <NavBar setCurrentPage={setCurrentPage} />
+    </View>
   );
 };
 

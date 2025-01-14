@@ -10,6 +10,7 @@ const sharedStyles = StyleSheet.create({
     justifyContent: "flex-start",
     gap: 10,
     paddingTop: "15%",
+    paddingBottom: 60
   },
   blueButton: {
     backgroundColor: Color.blue,

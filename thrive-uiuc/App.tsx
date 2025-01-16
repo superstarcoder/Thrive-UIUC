@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, FC } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState, FC, useEffect } from "react";
+import { StyleSheet, View, BackHandler } from "react-native";
 import Color from "./styles/Color";
 import AuthPage from "./components/AuthPage/AuthPage";
 import CreateProfilePage from "./components/ProfilePage/CreateProfilePage";
@@ -14,14 +14,43 @@ export type PageName = "auth-page" | "create-profile-page" | "home-page" | "meet
 
 const App: FC<Props> = () => {
   const [currentPage, setCurrentPage] = useState<PageName>("auth-page");
+  const [navigationStack, setNavigationStack] = useState<PageName[]>(["auth-page"]);
+
+  const navigate = (page: PageName) => {
+    setNavigationStack((prevStack) => [...prevStack, page]);
+    setCurrentPage(page);
+  };
+
+  const handleBackAction = () => {
+    if (navigationStack.length > 1) {
+      const newStack = [...navigationStack];
+      newStack.pop();
+      setNavigationStack(newStack);
+      setCurrentPage(newStack[newStack.length - 1]);
+    }
+    else {
+      BackHandler.exitApp();
+    }
+    return true;
+  };
+
+  useEffect(() => {
+    // Add back button event listener
+    BackHandler.addEventListener("hardwareBackPress", handleBackAction);
+
+    return () => {
+      // Remove event listener on component unmount
+      BackHandler.removeEventListener("hardwareBackPress", handleBackAction);
+    };
+  }, [navigationStack]);
 
   return (
     <GestureHandlerRootView>
       <View style={styles.container}>
-        {currentPage == "auth-page" && <AuthPage setCurrentPage={setCurrentPage} />}
-        {currentPage == "create-profile-page" && <CreateProfilePage setCurrentPage={setCurrentPage} />}
-        {currentPage == "home-page" && <HomePage setCurrentPage={setCurrentPage} />}
-        {currentPage == "meet-new-students-page" && <MeetNewStudentsPage setCurrentPage={setCurrentPage} />}
+        {currentPage == "auth-page" && <AuthPage setCurrentPage={navigate} />}
+        {currentPage == "create-profile-page" && <CreateProfilePage setCurrentPage={navigate} />}
+        {currentPage == "home-page" && <HomePage setCurrentPage={navigate} />}
+        {currentPage == "meet-new-students-page" && <MeetNewStudentsPage setCurrentPage={navigate} />}
       </View>
     </GestureHandlerRootView>
   );

@@ -8,8 +8,10 @@ import Color from "../../styles/Color";
 import { ScrollView } from "react-native-gesture-handler";
 import { ProfileSettings } from "../../utils/types";
 import NavBar from "../sharedComponents/NavBar";
+import { PageName } from "../../App";
+
 type HomePageProps = {
-  setCurrentPage: any;
+  setCurrentPage: (page: PageName) => void;
 };
 
 const profileData: ProfileSettings[] = [

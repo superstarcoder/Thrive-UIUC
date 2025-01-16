@@ -7,9 +7,10 @@ import sharedStyles from "../../styles/SharedStyles";
 import Color from "../../styles/Color";
 import { StyledH1 } from "../sharedComponents/Text/StyledText";
 import NavBar from "../sharedComponents/NavBar";
+import { PageName } from "../../App";
 
 type Props = {
-  setCurrentPage: any;
+  setCurrentPage: (page: PageName) => void;
 };
 
 const profiles: ProfileSettings[] = [

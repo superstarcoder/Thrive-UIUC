@@ -35,11 +35,8 @@ const App: FC<Props> = () => {
   };
 
   useEffect(() => {
-    // Add back button event listener
     BackHandler.addEventListener("hardwareBackPress", handleBackAction);
-
     return () => {
-      // Remove event listener on component unmount
       BackHandler.removeEventListener("hardwareBackPress", handleBackAction);
     };
   }, [navigationStack]);

@@ -3,9 +3,10 @@ import React from "react";
 import Color from "../../styles/Color";
 import sharedStyles from "../../styles/SharedStyles";
 import { StyledH3 } from "./Text/StyledText";
+import { PageName } from "../../App";
 
 type Props = {
-  setCurrentPage: any;
+  setCurrentPage: (page: PageName) => void;
 };
 
 const NavBar = (props: Props) => {
@@ -47,11 +48,12 @@ const styles = StyleSheet.create({
     boxShadow: "0px 0px 4px 0px rgba(0,0,0,0.75)",
     display: "flex",
     flexDirection: "row",
+    justifyContent: "center",
+    gap: 100
   },
   navBarButton: {
     height: "100%",
     width: 50,
-    marginHorizontal: 30,
     paddingVertical: 10,
     alignContent: "center",
     alignItems: "center"

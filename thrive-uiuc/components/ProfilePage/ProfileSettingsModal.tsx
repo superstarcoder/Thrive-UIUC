@@ -13,7 +13,9 @@ import Tag from "../sharedComponents/Tag";
 import { isEqualTagData, objectMatchesAnyInArray } from "../../utils/utils";
 import { HOBBIES, Hobby, Major, MAJORS, ProfileSettings, Year, YEARS } from "../../utils/types";
 
-export type Props = { onSavePress: any };
+export type Props = { 
+  onSavePress: any
+};
 
 const defaultProfileSettings: ProfileSettings = {
   id: "",

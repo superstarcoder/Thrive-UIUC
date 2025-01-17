@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import sharedStyles from "../../styles/SharedStyles";
 import React from "react";
 import HomePageButton from "./HomePageButton";
@@ -7,9 +7,11 @@ import ProfilePreviewBox from "./ProfilePreviewBox";
 import Color from "../../styles/Color";
 import { ScrollView } from "react-native-gesture-handler";
 import { ProfileSettings } from "../../utils/types";
+import NavBar from "../sharedComponents/NavBar";
+import { PageName } from "../../App";
 
 type HomePageProps = {
-  setCurrentPage: any;
+  setCurrentPage: (page: PageName) => void;
 };
 
 const profileData: ProfileSettings[] = [
@@ -138,30 +140,34 @@ const HomePage = (props: HomePageProps) => {
   const startStudySessionButtonLabel = "Start a Study Session 📚";
   const ongoingStudySessionsHeading = "Ongoing Study Sessions";
   const yourNetworkHeading = "Your Network";
+  const { width } = useWindowDimensions();
 
   return (
-    <ScrollView overScrollMode="never" contentContainerStyle={styles.scrollContainer}>
-      <View style={[sharedStyles.pageContainer, styles.homePage]}>
-        <View style={styles.homePageButtons}>
-          <HomePageButton
-            label={meetNewStudentsButtonLabel}
-            onPress={() => {
-              setCurrentPage("meet-new-students-page");
-            }}
-          />
-          <HomePageButton
-            label={startStudySessionButtonLabel}
-            onPress={() => {
-              setCurrentPage("meet-new-students-page");
-            }}
-          />
+    <View>
+      <ScrollView overScrollMode="never" contentContainerStyle={styles.scrollContainer}>
+        <View style={[sharedStyles.pageContainer, styles.homePage]}>
+          <View style={styles.homePageButtons}>
+            <HomePageButton
+              label={meetNewStudentsButtonLabel}
+              onPress={() => {
+                setCurrentPage("meet-new-students-page");
+              }}
+            />
+            <HomePageButton
+              label={startStudySessionButtonLabel}
+              onPress={() => {
+                setCurrentPage("meet-new-students-page");
+              }}
+            />
+          </View>
+          <StyledH2 text={ongoingStudySessionsHeading} />
+          <OngoingStudySessionsBox />
+          <StyledH2 text={yourNetworkHeading} />
+          <YourNetworkBox width={width} />
         </View>
-        <StyledH2 style={styles.sectionHeading} text={ongoingStudySessionsHeading} />
-        <OngoingStudySessionsBox />
-        <StyledH2 style={styles.sectionHeading} text={yourNetworkHeading} />
-        <YourNetworkBox />
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <NavBar setCurrentPage={setCurrentPage} />
+    </View>
   );
 };
 
@@ -176,12 +182,15 @@ const OngoingStudySessionsBox = (props: OngoingStudySessionBoxProps) => {
   );
 };
 
-type YourNetworkBoxProps = {};
+type YourNetworkBoxProps = {
+  width: number;
+};
 const YourNetworkBox = (props: YourNetworkBoxProps) => {
+  const { width } = props;
   return (
-    <View style={styles.profileList}>
+    <View style={[styles.profileList, { width: width * 0.8 }]}>
       {profileData.map((item, index) => (
-        <ProfilePreviewBox profileName={item.name} key={index} />
+        <ProfilePreviewBox profileName={item.name} key={index} width={width} />
       ))}
     </View>
   );
@@ -196,19 +205,18 @@ const styles = StyleSheet.create({
   scrollContainer: {
     backgroundColor: Color.darkestBlue,
     minHeight: "100%",
-    paddingVertical: 20,
+    paddingTop: 20,
   },
   homePage: {
     gap: 30,
   },
-  sectionHeading: {},
   profileList: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     rowGap: 10,
     columnGap: 10,
-    maxWidth: 250,
+    marginLeft: 10
   },
   ongoingStudySessionsBox: {
     backgroundColor: Color.darkBlue,

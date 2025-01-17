@@ -5,7 +5,7 @@ import { StyledH1, StyledH2 } from "../sharedComponents/Text/StyledText";
 import { PageName } from "../../App";
 
 type Props = {
-  setCurrentPage: any;
+  setCurrentPage: (page: PageName) => void;
 };
 
 const ContinueButton = ({ setCurrentPage }: Props) => {

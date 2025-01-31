@@ -165,6 +165,7 @@ const ConnectIgnoreArea = (props: ConnectIgnoreAreaProps) => {
 
 const styles = StyleSheet.create({
   profileCard: {
+    minWidth: "100%",
     backgroundColor: Color.darkBlue,
     borderRadius: 17,
   },

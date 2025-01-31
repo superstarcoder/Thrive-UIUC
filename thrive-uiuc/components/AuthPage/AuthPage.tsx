@@ -6,7 +6,7 @@ import sharedStyles from "../../styles/SharedStyles";
 import { PageName } from "../../App";
 
 type Props = {
-  setCurrentPage: React.Dispatch<React.SetStateAction<PageName>>;
+  setCurrentPage: (page: PageName) => void;
 };
 
 const AuthPage = ({ setCurrentPage }: Props) => {

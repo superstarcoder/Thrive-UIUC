@@ -1,26 +1,28 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Color from "../../styles/Color";
+import { House, User } from "phosphor-react-native";
 import sharedStyles from "../../styles/SharedStyles";
 import { StyledH3 } from "./Text/StyledText";
 import { PageName } from "../../App";
 
 type Props = {
+  currentPage: PageName;
   setCurrentPage: (page: PageName) => void;
 };
 
 const NavBar = (props: Props) => {
-  const { setCurrentPage } = props;
+  const { currentPage, setCurrentPage } = props;
   const label = "Home";
   return (
     <View style={styles.navBar}>
       <TouchableOpacity
-        style={styles.navBarButton}
+        style={[styles.navBarButton,currentPage === "home-page" ? {borderTopWidth: 3} : {borderTopWidth: 0} ]}
         onPress={() => {
           setCurrentPage("home-page");
         }}
       >
-        <Image source={require("../../assets/navbar/homeIcon.png")} style={styles.navBarButtonIcon} />
+        <House color="white" size="34px" weight={currentPage === "home-page" ? "fill" : "regular"}></House>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.navBarButton}
@@ -28,7 +30,7 @@ const NavBar = (props: Props) => {
           setCurrentPage("create-profile-page");
         }}
       >
-        <Image source={require("../../assets/navbar/profileIcon.png")} style={styles.navBarButtonIcon} />
+        <User color="white" size="34px"></User>
       </TouchableOpacity>
     </View>
   );
@@ -54,12 +56,9 @@ const styles = StyleSheet.create({
   navBarButton: {
     height: "100%",
     width: 50,
-    paddingVertical: 10,
+    paddingVertical: 8,
     alignContent: "center",
-    alignItems: "center"
-  },
-  navBarButtonIcon: {
-    width: 30,
-    height: 30,
+    alignItems: "center",
+    borderTopColor: "white"
   },
 });

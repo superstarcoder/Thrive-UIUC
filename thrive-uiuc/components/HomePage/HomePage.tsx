@@ -2,7 +2,7 @@ import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import sharedStyles from "../../styles/SharedStyles";
 import React from "react";
 import HomePageButton from "./HomePageButton";
-import { StyledH2, StyledH3, StyledH4 } from "../sharedComponents/Text/StyledText";
+import { StyledH1, StyledH2, StyledH3, StyledH4 } from "../sharedComponents/Text/StyledText";
 import ProfilePreviewBox from "./ProfilePreviewBox";
 import Color from "../../styles/Color";
 import { ScrollView } from "react-native-gesture-handler";
@@ -11,6 +11,7 @@ import NavBar from "../sharedComponents/NavBar";
 import { PageName } from "../../App";
 
 type HomePageProps = {
+  currentPage: PageName;
   setCurrentPage: (page: PageName) => void;
 };
 
@@ -135,7 +136,8 @@ const profileData: ProfileSettings[] = [
 ];
 
 const HomePage = (props: HomePageProps) => {
-  const { setCurrentPage } = props;
+  const { currentPage, setCurrentPage } = props;
+  const homePageHeadingLabel = "Home";
   const meetNewStudentsButtonLabel = "Meet New Students 👋";
   const startStudySessionButtonLabel = "Start a Study Session 📚";
   const ongoingStudySessionsHeading = "Ongoing Study Sessions";
@@ -146,6 +148,7 @@ const HomePage = (props: HomePageProps) => {
     <View>
       <ScrollView overScrollMode="never" contentContainerStyle={styles.scrollContainer}>
         <View style={[sharedStyles.pageContainer, styles.homePage]}>
+          <StyledH1 text={homePageHeadingLabel} style={{ textAlign: "center" }} />
           <View style={styles.homePageButtons}>
             <HomePageButton
               label={meetNewStudentsButtonLabel}
@@ -166,7 +169,7 @@ const HomePage = (props: HomePageProps) => {
           <YourNetworkBox width={width} />
         </View>
       </ScrollView>
-      <NavBar setCurrentPage={setCurrentPage} />
+      <NavBar currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </View>
   );
 };
@@ -205,10 +208,10 @@ const styles = StyleSheet.create({
   scrollContainer: {
     backgroundColor: Color.darkestBlue,
     minHeight: "100%",
-    paddingTop: 20,
   },
   homePage: {
     gap: 30,
+    paddingBottom: 60
   },
   profileList: {
     display: "flex",

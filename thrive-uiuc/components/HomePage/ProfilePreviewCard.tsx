@@ -7,7 +7,7 @@ type Props = {
   width: number;
 };
 
-const ProfilePreviewBox = (props: Props) => {
+const ProfilePreviewCard = (props: Props) => {
   const { profileName, width } = props;
   return (
     <View style={[styles.profile, { width: width * 0.4 - 10 }]}>
@@ -17,7 +17,7 @@ const ProfilePreviewBox = (props: Props) => {
   );
 };
 
-export default ProfilePreviewBox;
+export default ProfilePreviewCard;
 
 const styles = StyleSheet.create({
   profile: {

@@ -59,21 +59,21 @@ export function findTimeUntil(nonCurrentTime: Date) {
     const formattedMinutes = nonCurrentTime.toTimeString().substring(3,5);
     if (nonCurrentTime.getDate() != currentTime.getDate() && nonCurrentTime.getTime() > currentTime.getTime()) {
       if (nonCurrentTime.getHours() > 12) {
-        timeString = "Tomorrow at " + (nonCurrentTime.getHours() % 12) + ":" + formattedMinutes + " PM";
+        timeString = "Tomorrow, " + (nonCurrentTime.getHours() % 12) + ":" + formattedMinutes + "PM";
       } else {
-        timeString = "Tomorrow at " + nonCurrentTime.getHours() + ":" + formattedMinutes + " AM";
+        timeString = "Tomorrow, " + nonCurrentTime.getHours() + ":" + formattedMinutes + "AM";
       }
     } else if (nonCurrentTime.getDate() != currentTime.getDate() && nonCurrentTime.getTime() < currentTime.getTime()) {
       if (nonCurrentTime.getHours() > 12) {
-        timeString = "Yesterday at " + (nonCurrentTime.getHours() % 12) + ":" + formattedMinutes + " PM";
+        timeString = "Yesterday, " + (nonCurrentTime.getHours() % 12) + ":" + formattedMinutes + "PM";
       } else {
-        timeString = "Yesterday at " + nonCurrentTime.getHours() + ":" + formattedMinutes + " AM";
+        timeString = "Yesterday, " + nonCurrentTime.getHours() + ":" + formattedMinutes + "AM";
       }
     } else if (nonCurrentTime.getDate() === currentTime.getDate()) {
       if (nonCurrentTime.getHours() > 12) {
-        timeString = "Today at " + (nonCurrentTime.getHours() % 12) + ":" + formattedMinutes + " PM";
+        timeString = "Today, " + (nonCurrentTime.getHours() % 12) + ":" + formattedMinutes + "PM";
       } else {
-        timeString = "Today at " + nonCurrentTime.getHours() + ":" + formattedMinutes + " AM";
+        timeString = "Today, " + nonCurrentTime.getHours() + ":" + formattedMinutes + "AM";
       }
     }
   }
@@ -87,4 +87,10 @@ export function formatNumPeople(people: number) {
     return people + " person";
   }
   return people + " people";
+}
+
+// Utility function to truncate strings to a specified character count, with optional ellipses
+export function truncateText(text: string, ellipses: boolean, length: number) {
+	var moddedText = text.length > length ? text.slice(0, length) + (ellipses ? "..." : "") : text;
+	return moddedText;
 }

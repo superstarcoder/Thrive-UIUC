@@ -139,7 +139,7 @@ const profileData: ProfileSettings[] = [
 const studySessionData: StudySessionSettings[] = [
   {
     id: "1",
-    name: "test1",
+    name: "MATH 257 Grind Session Group",
     minPeople: 1,
     maxPeople: 2,
     startTime: new Date(Date.now() + 80400000),
@@ -148,7 +148,7 @@ const studySessionData: StudySessionSettings[] = [
   },
   {
     id: "2",
-    name: "test2",
+    name: "CS 173",
     minPeople: 1,
     maxPeople: 1,
     startTime: new Date(Date.now() + 804000000),
@@ -162,7 +162,7 @@ const HomePage = (props: HomePageProps) => {
   const homePageHeadingLabel = "Home";
   const meetNewStudentsButtonLabel = "Meet New Students 👋";
   const startStudySessionButtonLabel = "Start a Study Session 📚";
-  const ongoingStudySessionsHeading = "Ongoing Study Sessions";
+  const upcomingStudySessionsHeading = "Upcoming Study Sessions";
   const yourNetworkHeading = "Your Network";
   const { width } = useWindowDimensions();
 
@@ -172,12 +172,14 @@ const HomePage = (props: HomePageProps) => {
         <View style={[sharedStyles.pageContainer, styles.homePage]}>
           <StyledH1 text={homePageHeadingLabel} style={{ textAlign: "center" }} />
           <View style={styles.homePageButtons}>
+						{/* Meet New Students Button */}
             <HomePageButton
               label={meetNewStudentsButtonLabel}
               onPress={() => {
                 setCurrentPage("meet-new-students-page");
               }}
             />
+						{/* Start a Study Session Button */}
             <HomePageButton
               label={startStudySessionButtonLabel}
               onPress={() => {
@@ -185,8 +187,8 @@ const HomePage = (props: HomePageProps) => {
               }}
             />
           </View>
-          <StyledH2 text={ongoingStudySessionsHeading} />
-          <OngoingStudySessionsBox studySessionData={studySessionData} width={width} />
+          <StyledH2 text={upcomingStudySessionsHeading} />
+          <UpcomingStudySessionsBox studySessionData={studySessionData} width={width} />
           <StyledH2 text={yourNetworkHeading} />
           <YourNetworkBox profileData={profileData} width={width} />
         </View>
@@ -196,20 +198,20 @@ const HomePage = (props: HomePageProps) => {
   );
 };
 
-type OngoingStudySessionBoxProps = {
+type UpcomingStudySessionBoxProps = {
   studySessionData: StudySessionSettings[];
   width: number;
 };
 
-const OngoingStudySessionsBox = (props: OngoingStudySessionBoxProps) => {
+const UpcomingStudySessionsBox = (props: UpcomingStudySessionBoxProps) => {
   const { studySessionData, width } = props;
   const studySessionExists = studySessionData.length > 0;
-  const defaultText = "There are no ongoing public study sessions.";
+  const defaultText = "You have no upcoming study sessions.";
   return (
     <View>
       {!studySessionExists && (
-        <View style={styles.ongoingStudySessionsBoxNoSessions}>
-          <StyledH3 style={styles.ongoingStudySessionsBoxText} text={defaultText} />
+        <View style={styles.upcomingStudySessionsBoxNoSessions}>
+          <StyledH3 style={styles.upcomingStudySessionsBoxText} text={defaultText} />
         </View>
       )}
       {studySessionExists && (
@@ -262,14 +264,14 @@ const styles = StyleSheet.create({
     columnGap: 10,
     marginLeft: 10,
   },
-  ongoingStudySessionsBoxNoSessions: {
+  upcomingStudySessionsBoxNoSessions: {
     backgroundColor: Color.darkBlue,
     width: "70%",
     borderRadius: 20,
     paddingHorizontal: 30,
     paddingVertical: 20,
   },
-  ongoingStudySessionsBoxText: {
+  upcomingStudySessionsBoxText: {
     textAlign: "center",
     color: Color.blue,
   },

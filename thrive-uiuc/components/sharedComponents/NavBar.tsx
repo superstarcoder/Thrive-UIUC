@@ -30,7 +30,7 @@ const NavBar = (props: Props) => {
           setCurrentPage("create-profile-page");
         }}
       >
-        <User color="white" size="34px"></User>
+        <User color="white" size="34px" weight={currentPage === "create-profile-page" ? "fill" : "regular"}></User>
       </TouchableOpacity>
     </View>
   );

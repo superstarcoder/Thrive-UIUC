@@ -28,3 +28,20 @@ export type ProfileSettings = {
   hobbies: Hobby[];
   classes: Class[];
 };
+
+export const STUDY_LOCATIONS = [
+  "Main Library",
+  "Funk ACES Library",
+  "Grainger Library",
+];
+export type StudyLocation = (typeof STUDY_LOCATIONS)[number];
+
+export type StudySessionSettings = {
+  id: string;
+  name: string;
+  minPeople: number;
+  maxPeople: number;
+  startTime: Date;
+  endTime: Date;
+  location: StudyLocation;
+};

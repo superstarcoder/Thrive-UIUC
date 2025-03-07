@@ -46,8 +46,8 @@ const App: FC<Props> = () => {
       <View style={styles.container}>
         {currentPage == "auth-page" && <AuthPage setCurrentPage={navigate} />}
         {currentPage == "create-profile-page" && <CreateProfilePage setCurrentPage={navigate} />}
-        {currentPage == "home-page" && <HomePage setCurrentPage={navigate} />}
-        {currentPage == "meet-new-students-page" && <MeetNewStudentsPage setCurrentPage={navigate} />}
+        {currentPage == "home-page" && <HomePage currentPage={currentPage} setCurrentPage={navigate} />}
+        {currentPage == "meet-new-students-page" && <MeetNewStudentsPage currentPage={currentPage} setCurrentPage={navigate} />}
       </View>
     </GestureHandlerRootView>
   );

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Color from "../../styles/Color";
 import { StyledH4 } from "../sharedComponents/Text/StyledText";
@@ -11,10 +11,12 @@ type Props = {
 const ProfilePreviewCard = (props: Props) => {
   const { profileName, width } = props;
   return (
-    <View style={[styles.profile, { width: width * 0.4 - 10 }]}>
-      <Image source={require("../../assets/testing/DefaultProfileImage.jpg")} style={styles.profileImage} />
-      <StyledH4 numberOfLines={1} text={truncateText(profileName, true, 18)} style={styles.profileText} />
-    </View>
+    <TouchableOpacity>
+      <View style={[styles.profile, { width: width * 0.4 - 10 }]}>
+        <Image source={require("../../assets/testing/DefaultProfileImage.jpg")} style={styles.profileImage} />
+        <StyledH4 numberOfLines={1} text={truncateText(profileName, true, 18)} style={styles.profileText} />
+      </View>
+    </TouchableOpacity>
   );
 };
 

@@ -10,6 +10,23 @@ type Props = {
   ellipsizeMode?: "head" | "middle" | "tail" | "clip";
 };
 
+export function StyledH0({ text, style = {}, weight = "regular", numberOfLines = 0, ellipsizeMode = "tail" }: Props) {
+  var [fontsLoaded] = useFonts({
+    MPlusRegular: require("../../../assets/fonts/mplusRegular.ttf"),
+    MPlusMedium: require("../../../assets/fonts/mplusMedium.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  return (
+    <Text style={[fontStyles.styledH0, style]} numberOfLines={numberOfLines} ellipsizeMode={ellipsizeMode}>
+      {text}
+    </Text>
+  );
+}
+
 export function StyledH1({ text, style = {}, weight = "regular", numberOfLines = 0, ellipsizeMode = "tail" }: Props) {
   var [fontsLoaded] = useFonts({
     MPlusRegular: require("../../../assets/fonts/mplusRegular.ttf"),
@@ -85,6 +102,11 @@ export function StyledH4({ text, style = {}, weight = "regular", numberOfLines =
 }
 
 export const fontStyles = {
+	styledH0: {
+		fontFamily: "MPlusMedium",
+		fontSize: 26,
+		color: "white",
+	},
   styledH1: {
     fontFamily: "MPlusMedium",
     fontSize: 24,

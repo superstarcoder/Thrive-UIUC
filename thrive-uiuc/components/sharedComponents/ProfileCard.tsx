@@ -45,8 +45,8 @@ const ProfileHeader = (props: ProfileHeaderProps) => {
   return (
     <View style={styles.profileCardHeader}>
       <Image source={require("../../assets/testing/DefaultProfileImage.jpg")} style={styles.profileImage} />
-      <View>
-        <StyledH2 text={name} numberOfLines={1} ellipsizeMode="tail" />
+      <View style={{marginTop: 1}}>
+        <StyledH3 text={name} numberOfLines={1} ellipsizeMode="tail" />
         <StyledH4 text={year} style={styles.profileCardHeaderYearText} />
       </View>
     </View>

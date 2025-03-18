@@ -17,7 +17,7 @@ const NavBar = (props: Props) => {
   return (
     <View style={styles.navBar}>
       <TouchableOpacity
-        style={[styles.navBarButton,currentPage === "home-page" ? {borderTopWidth: 3} : {borderTopWidth: 0} ]}
+        style={[styles.navBarButton, currentPage === "home-page" ? { borderTopWidth: 3 } : { borderTopWidth: 0 }]}
         onPress={() => {
           setCurrentPage("home-page");
         }}
@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    gap: 100
+    gap: 100,
+    zIndex: 10000,
   },
   navBarButton: {
     height: "100%",
@@ -59,6 +60,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     alignContent: "center",
     alignItems: "center",
-    borderTopColor: "white"
+    borderTopColor: "white",
   },
 });

@@ -59,26 +59,54 @@ export function findTimeUntil(nonCurrentTime: Date) {
     const formattedMinutes = nonCurrentTime.toTimeString().substring(3,5);
     if (nonCurrentTime.getDate() != currentTime.getDate() && nonCurrentTime.getTime() > currentTime.getTime()) {
       if (nonCurrentTime.getHours() > 12) {
-        timeString = "Tomorrow, " + (nonCurrentTime.getHours() % 12) + ":" + formattedMinutes + "PM";
-      } else {
-        timeString = "Tomorrow, " + nonCurrentTime.getHours() + ":" + formattedMinutes + "AM";
+        timeString = (nonCurrentTime.getHours() % 12) + ":" + formattedMinutes + " PM, Tomorrow" ;
+      } else if (nonCurrentTime.getHours() === 12) {
+				timeString = 12 + ":" + formattedMinutes + " PM, Tomorrow" ;
+			} else {
+        timeString = nonCurrentTime.getHours() + ":" + formattedMinutes + " AM, Tomorrow";
       }
     } else if (nonCurrentTime.getDate() != currentTime.getDate() && nonCurrentTime.getTime() < currentTime.getTime()) {
       if (nonCurrentTime.getHours() > 12) {
-        timeString = "Yesterday, " + (nonCurrentTime.getHours() % 12) + ":" + formattedMinutes + "PM";
-      } else {
-        timeString = "Yesterday, " + nonCurrentTime.getHours() + ":" + formattedMinutes + "AM";
+        timeString = (nonCurrentTime.getHours() % 12) + ":" + formattedMinutes + " PM, Yesterday";
+      } else if (nonCurrentTime.getHours() === 12) {
+				timeString = 12 + ":" + formattedMinutes + " PM, Yesterday" ;
+			} else {
+        timeString = nonCurrentTime.getHours() + ":" + formattedMinutes + " AM, Yesterday";
       }
     } else if (nonCurrentTime.getDate() === currentTime.getDate()) {
       if (nonCurrentTime.getHours() > 12) {
-        timeString = "Today, " + (nonCurrentTime.getHours() % 12) + ":" + formattedMinutes + "PM";
-      } else {
-        timeString = "Today, " + nonCurrentTime.getHours() + ":" + formattedMinutes + "AM";
+        timeString = (nonCurrentTime.getHours() % 12) + ":" + formattedMinutes + " PM, Today";
+      } else if (nonCurrentTime.getHours() === 12) {
+				timeString = 12 + ":" + formattedMinutes + " PM, Today" ;
+			} else {
+        timeString = nonCurrentTime.getHours() + ":" + formattedMinutes + " AM, Today";
       }
     }
   }
   
   return timeString;
+}
+
+// Utility function to find duration in hours + minutes 
+export function findDuration(startTime: Date, endTime: Date) {
+	const durationMs = Math.abs(endTime.getTime() - startTime.getTime());
+	const durationHr = Math.floor(durationMs / 3600000);
+	const durationMinFull = Math.floor(durationMs / 60000);
+	const durationMinAfterHr = durationMinFull % 60;
+	if (durationMinAfterHr === 0) {
+		if (durationHr > 1) {
+			return durationHr + " hours";
+		}
+		return durationHr + " hour";
+	}
+	if (durationHr > 1 && durationMinAfterHr > 1) {
+		return durationHr + " hours and " + durationMinAfterHr + " minutes";
+	} else if (durationHr > 1) {
+		return durationHr + " hours and " + durationMinAfterHr + " minute";
+	} else if (durationMinAfterHr > 1) {
+		return durationHr + " hour and " + durationMinAfterHr + " minutes";
+	}
+	return durationHr + " hour and " + durationMinAfterHr + " minute";
 }
 
 // Utility function to return a formatted string of the number of people
@@ -91,6 +119,6 @@ export function formatNumPeople(people: number) {
 
 // Utility function to truncate strings to a specified character count, with optional ellipses
 export function truncateText(text: string, ellipses: boolean, length: number) {
-	var moddedText = text.length > length ? text.slice(0, length) + (ellipses ? "..." : "") : text;
+	var moddedText = text.length > length ? text.slice(0, length - 3) + (ellipses ? "..." : "") : text;
 	return moddedText;
 }

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import React from "react";
 import ProfileCard from "../sharedComponents/ProfileCard";
@@ -9,10 +9,11 @@ import { StyledH1 } from "../sharedComponents/Text/StyledText";
 import NavBar from "../sharedComponents/NavBar";
 import { PageName } from "../../App";
 import { ArrowLeft, CaretLeft } from "phosphor-react-native";
+import PageHeader from "../sharedComponents/PageHeader";
 
 type Props = {
   currentPage: PageName;
-  setCurrentPage: (page: PageName) => void;
+	handleBackAction: () => void;
 };
 
 const profiles: ProfileSettings[] = [
@@ -49,26 +50,19 @@ const profiles: ProfileSettings[] = [
 ];
 
 const MeetNewStudentsPage = (props: Props) => {
-  const { currentPage, setCurrentPage } = props;
-  const meetNewStudentsPageHeading = "Meet New Students";
+  const { currentPage, handleBackAction } = props;
   return (
-    <View>
+    <SafeAreaView style={sharedStyles.androidSafeAreaContainer}>
+			<StatusBar barStyle="light-content" backgroundColor={Color.darkestBlue} />
+			<PageHeader header="Meet New Students"  isBackButtonPresent={true} handleBackAction={handleBackAction} />
       <ScrollView overScrollMode="never" contentContainerStyle={styles.scrollContainer}>
         <View style={[sharedStyles.pageContainer, styles.meetNewStudentsPage]}>
-          <View style={styles.meetNewStudentsHeader}>
-            <TouchableOpacity style={{position: "absolute", left: 0, marginLeft: 10, marginTop: 1}} onPress={() => {
-                setCurrentPage("home-page");
-              }}>
-              <ArrowLeft color="white" size="30px" weight="bold" />
-            </TouchableOpacity>
-            <StyledH1 text={meetNewStudentsPageHeading} style={{ textAlign: "center" }} />
-          </View>
           {profiles.map((item, index) => (
             <ProfileCard profileSettings={item} key={index} />
           ))}
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -81,13 +75,9 @@ const styles = StyleSheet.create({
   },
   meetNewStudentsPage: {
     gap: 15,
-    padding: 20,
-  },
-  meetNewStudentsHeader: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-    width: "100%"
+		paddingTop: 10,
+    paddingBottom: 20,
+		paddingLeft: 20,
+		paddingRight: 20,
   },
 });

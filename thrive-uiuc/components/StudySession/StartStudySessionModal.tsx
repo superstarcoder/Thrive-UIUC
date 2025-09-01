@@ -15,19 +15,20 @@ import { HOBBIES, Hobby, Major, MAJORS, ProfileSettings, StudySessionSettings, Y
 import StudySessionPreviewCard from "../HomePage/StudySessionPreviewCard";
 import DualThumbSlider from "../sharedComponents/RangeSlider";
 import RangeSlider from "../sharedComponents/RangeSlider";
+import LocationSelectField from "./LocationSelectField";
 
 export type Props = {
   onSavePress: any;
 };
 
-const defaultProfileSettings: ProfileSettings = {
-  id: "",
+const defaultStudySessionSettings: StudySessionSettings = {
+  id: "0",
   name: "",
-  year: null,
-  major: null,
-  introduction: "",
-  hobbies: [],
-  classes: [],
+  minPeople: 2,
+  maxPeople: 5,
+  startTime: new Date(Date.now() + 80400000),
+  endTime: new Date(Date.now() + 262800000),
+  location: null,
 };
 
 const sampleStudySessionData: StudySessionSettings[] = [
@@ -38,60 +39,29 @@ const sampleStudySessionData: StudySessionSettings[] = [
     maxPeople: 2,
     startTime: new Date(Date.now() + 80400000),
     endTime: new Date(Date.now() + 262800000),
-    location: "Grainger Library",
-  },
-  {
-    id: "2",
-    name: "CS 173",
-    minPeople: 1,
-    maxPeople: 1,
-    startTime: new Date(Date.now() + 804000000),
-    endTime: new Date(Date.now() + 962800000),
-    location: "Funk ACES Library",
+    location: null,
   },
 ];
+
+// TODO: make a data type for StudyLocation and StudyRoom!!
+// 
 
 const StartStudySessionModal = ({ onSavePress }: Props) => {
   const bottomSheetRef: any = useRef(null);
   // const [profileSettings, setProfileSettings] = useState<ProfileSettings>(defaultProfileSettings);
-  const [studySessionSettings, setStudySessionSettings] = useState<StudySessionSettings>(sampleStudySessionData[0]);
+  const [studySessionSettings, setStudySessionSettings] = useState<StudySessionSettings>(defaultStudySessionSettings);
 
   const updateName = (newName: string) => setStudySessionSettings((prev) => ({ ...prev, name: newName }));
 
-  const updateMinPeople = (newMinPeople: number) => setStudySessionSettings((prev) => ({ ...prev, minPeople: newMinPeople }));
-  const updateMaxPeople = (newMaxPeople: number) => setStudySessionSettings((prev) => ({ ...prev, maxPeople: newMaxPeople }));
-
-  // const updateYear = (newYear: Year | null) => setProfileSettings((prev) => ({ ...prev, year: newYear }));
-
-  // const updateMajor = (newMajor: Major | null) => setProfileSettings((prev) => ({ ...prev, major: newMajor }));
-
-  // const deleteMajor = (major: Major | null) =>
-  //   setProfileSettings((prev) => ({
-  //     ...prev,
-  //     major: null,
-  //   }));
-
-  // const updateIntroduction = (newIntroduction: string) =>
-  //   setProfileSettings((prev) => ({ ...prev, introduction: newIntroduction }));
-
-  // const addHobby = (newHobby: Hobby) => {
-  //   if (profileSettings.hobbies.includes(newHobby)) return;
-
-  //   setProfileSettings((prev) => ({
-  //     ...prev,
-  //     hobbies: [...prev.hobbies, newHobby],
-  //   }));
-  // };
-
-  // const removeHobby = (hobbyToRemove: Hobby) =>
-  //   setProfileSettings((prev) => ({
-  //     ...prev,
-  //     hobbies: prev.hobbies.filter((h) => h != hobbyToRemove),
-  //   }));
+  const updateMinPeople = (newMinPeople: number) =>
+    setStudySessionSettings((prev) => ({ ...prev, minPeople: newMinPeople }));
+  const updateMaxPeople = (newMaxPeople: number) =>
+    setStudySessionSettings((prev) => ({ ...prev, maxPeople: newMaxPeople }));
 
   useEffect(() => {
     bottomSheetRef?.current?.scrollTo(1);
   }, []);
+
 
 
   return (
@@ -133,10 +103,10 @@ const StartStudySessionModal = ({ onSavePress }: Props) => {
                 <StyledH4 text="(min - max)" style={styles.subtitle} />
               </View>
               <StyledH3 text={`${studySessionSettings.minPeople} - ${studySessionSettings.maxPeople} people`} />
-              <RangeSlider min={0} max={10} onValue1Change={updateMinPeople} onValue2Change={updateMaxPeople}/>
+              <RangeSlider min={0} max={10} onValue1Change={updateMinPeople} onValue2Change={updateMaxPeople} />
             </FormFieldContainer>
 
-              {/* TODO: work on making work so you can invite other ppl from ur network. */}
+            {/* TODO: work on making work so you can invite other ppl from ur network. */}
             {/* <FormFieldContainer>
               <StyledH3 text="Invite People From Your Network*" />
               <TextInputDropDown
@@ -149,39 +119,10 @@ const StartStudySessionModal = ({ onSavePress }: Props) => {
               />
             </FormFieldContainer> */}
 
-            <FormFieldContainer>
+            <View style={styles.locationFormFieldContainer}>
               <StyledH2 text="Where?*" />
-              <View style={styles.studyLocationOptions}>
-                <TouchableOpacity>
-                  <StudySessionPreviewCard
-                    sessionInfo={sampleStudySessionData[0]}
-                    width={360}
-                    displayLocationOnly={true}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <StudySessionPreviewCard
-                    sessionInfo={sampleStudySessionData[0]}
-                    width={360}
-                    displayLocationOnly={true}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <StudySessionPreviewCard
-                    sessionInfo={sampleStudySessionData[0]}
-                    width={360}
-                    displayLocationOnly={true}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <StudySessionPreviewCard
-                    sessionInfo={sampleStudySessionData[0]}
-                    width={360}
-                    displayLocationOnly={true}
-                  />
-                </TouchableOpacity>
-              </View>
-            </FormFieldContainer>
+              <LocationSelectField />
+            </View>
           </View>
         </ScrollView>
       </BottomSheet>
@@ -198,6 +139,12 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     backgroundColor: Color.orange,
     borderRadius: 10,
+  },
+  locationFormFieldContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
   },
   saveButtonText: {
     color: "black",
@@ -218,13 +165,5 @@ const styles = StyleSheet.create({
   subtitle: {
     color: Color.lightgray,
   },
-  studyLocationOptions: {
-    gap: 10,
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-  studyLocationOption: {
-    display: "flex",
-  },
+
 });

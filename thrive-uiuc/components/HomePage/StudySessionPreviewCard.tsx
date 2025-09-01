@@ -9,20 +9,26 @@ type Props = {
   sessionInfo: StudySessionSettings;
   width: number;
   displayLocationOnly?: boolean;
+  previewCardStyles?: Object;
 };
 
 const StudySessionPreviewCard = (props: Props) => {
-  const { sessionInfo, width, displayLocationOnly = false } = props;
+  const { sessionInfo, width, displayLocationOnly = false, previewCardStyles = {} } = props;
 
   return (
-    <View style={[styles.studySessionPreviewCard, { width: width * 0.4 - 10 }]}>
+    <View style={[styles.studySessionPreviewCard, { width: width * 0.4 - 10 }, previewCardStyles]}>
       <Image source={require("../../assets/testing/Grainger.png")} style={styles.locationImage} />
-      <StyledH3
+      {/* <StyledH3
         style={{ textAlign: "center" }}
         text={truncateText(sessionInfo.name, true, 11)}
         numberOfLines={1}
         ellipsizeMode="clip"
-      ></StyledH3>
+      ></StyledH3> */}
+      <StyledH4
+        style={{ textAlign: "center" }}
+        text={sessionInfo.name}
+        ellipsizeMode="clip"
+      ></StyledH4>
 
       {!displayLocationOnly && (
         <>
@@ -60,12 +66,14 @@ const styles = StyleSheet.create({
   studySessionPreviewCard: {
     backgroundColor: Color.darkBlue,
     alignItems: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
     paddingHorizontal: 9,
     paddingVertical: 15,
     borderRadius: 10,
+    justifyContent: "flex-start",
   },
   locationImage: {
+    top: 0,
     marginBottom: 7,
   },
   mainText: {},

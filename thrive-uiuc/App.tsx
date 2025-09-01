@@ -7,10 +7,11 @@ import CreateProfilePage from "./components/ProfilePage/CreateProfilePage";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import HomePage from "./components/HomePage/HomePage";
 import MeetNewStudentsPage from "./components/MeetNewStudentsPage/MeetNewStudentsPage";
+import StartStudySessionPage from "./components/StudySession/StartStudySessionPage";
 
 export type Props = {};
 
-export type PageName = "auth-page" | "create-profile-page" | "home-page" | "meet-new-students-page";
+export type PageName = "auth-page" | "create-profile-page" | "home-page" | "meet-new-students-page" | "start-study-session-page";
 
 const App: FC<Props> = () => {
   const [currentPage, setCurrentPage] = useState<PageName>("auth-page");
@@ -34,12 +35,12 @@ const App: FC<Props> = () => {
     return true;
   };
 
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", handleBackAction);
-    return () => {
-      BackHandler.removeEventListener("hardwareBackPress", handleBackAction);
-    };
-  }, [navigationStack]);
+  // useEffect(() => {
+  //   BackHandler.addEventListener("hardwareBackPress", handleBackAction);
+  //   return () => {
+  //     BackHandler.removeEventListener("hardwareBackPress", handleBackAction);
+  //   };
+  // }, [navigationStack]);
 
   return (
     <GestureHandlerRootView>
@@ -48,6 +49,7 @@ const App: FC<Props> = () => {
         {currentPage == "create-profile-page" && <CreateProfilePage setCurrentPage={navigate} />}
         {currentPage == "home-page" && <HomePage currentPage={currentPage} setCurrentPage={navigate} />}
         {currentPage == "meet-new-students-page" && <MeetNewStudentsPage currentPage={currentPage} setCurrentPage={navigate} />}
+        {currentPage == "start-study-session-page" && <StartStudySessionPage setCurrentPage={navigate} />}
       </View>
     </GestureHandlerRootView>
   );

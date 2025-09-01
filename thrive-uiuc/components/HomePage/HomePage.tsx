@@ -183,7 +183,7 @@ const HomePage = (props: HomePageProps) => {
             <HomePageButton
               label={startStudySessionButtonLabel}
               onPress={() => {
-                setCurrentPage("meet-new-students-page");
+                setCurrentPage("start-study-session-page");
               }}
             />
           </View>

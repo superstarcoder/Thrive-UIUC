@@ -9,23 +9,22 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~52.0.36",
-    "expo-status-bar": "~2.0.1",
+    "expo": "53.0.22",
+    "expo-status-bar": "~2.2.3",
     "ngrok": "^5.0.0-beta.2",
     "phosphor-react-native": "^2.3.1",
-    "react": "^18.3.1",
-    "react-native": "^0.76.7",
-    "react-native-gesture-handler": "~2.20.2",
-    "react-native-reanimated": "~3.16.1",
+    "react": "19.0.0",
+    "react-native": "0.79.5",
+    "react-native-gesture-handler": "~2.24.0",
+    "react-native-reanimated": "~3.17.4",
     "react-native-shadow-2": "^7.1.1",
-    "react-native-svg": "^15.8.0"
+    "react-native-svg": "15.11.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
-    "@react-native-community/cli": "latest",
     "@tsconfig/react-native": "^3.0.5",
     "@types/jest": "^29.5.14",
-    "@types/react": "~18.3.12",
+    "@types/react": "^19.0.0",
     "@types/react-test-renderer": "^19.0.0",
     "metro-config": "^0.81.0",
     "typescript": "^5.7.2"

@@ -35,12 +35,12 @@ const App: FC<Props> = () => {
     return true;
   };
 
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", handleBackAction);
-    return () => {
-      BackHandler.removeEventListener("hardwareBackPress", handleBackAction);
-    };
-  }, [navigationStack]);
+  // useEffect(() => {
+  //   BackHandler.addEventListener("hardwareBackPress", handleBackAction);
+  //   return () => {
+  //     BackHandler.removeEventListener("hardwareBackPress", handleBackAction);
+  //   };
+  // }, [navigationStack]);
 
   return (
     <GestureHandlerRootView>

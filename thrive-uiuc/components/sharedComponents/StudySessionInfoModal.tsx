@@ -2,7 +2,6 @@ import { Image, Modal, StyleSheet, Text, TouchableOpacity, View } from "react-na
 import React from "react";
 import Color from "../../styles/Color";
 import { ProfileSettings, StudySessionSettings } from "../../utils/types";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import NavBar from "./NavBar";
 import { PageName } from "../../App";
 import { StyledH3, StyledH3p5, StyledH4 } from "./Text/StyledText";
@@ -85,7 +84,8 @@ const StudySesionInfoModal = (props: Props) => {
               </Text>
               <Text>
                 <StyledH4 text={"📍 Location: "} />
-                <StyledH4 text={sessionInfo.location} style={styles.subText} />
+                {/*<StyledH4 text={sessionInfo.location} style={styles.subText} />*/}
+								<StyledH4 text={"Grainger 040A"} style={styles.subText} />
               </Text>
               <Text>
                 <StyledH4 text={"👥 People: "} />

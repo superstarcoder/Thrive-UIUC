@@ -7,6 +7,7 @@ import CreateProfilePage from "./components/ProfilePage/CreateProfilePage";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import HomePage from "./components/HomePage/HomePage";
 import MeetNewStudentsPage from "./components/MeetNewStudentsPage/MeetNewStudentsPage";
+import StartStudySessionPage from "./components/StudySession/StartStudySessionPage";
 import sharedStyles from "./styles/SharedStyles";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import { ProfileSettings } from "./utils/types";
@@ -18,7 +19,8 @@ export type PageName =
   | "auth-page"
   | "create-profile-page"
   | "home-page"
-  | "meet-new-students-page"
+  | "meet-new-students-page" 
+	| "start-study-session-page"
   | "profile-page"
   | "";
 
@@ -102,6 +104,7 @@ const App: FC<Props> = () => {
               handleBackAction={handleBackAction}
             />
           )}
+        {currentPage == "start-study-session-page" && <StartStudySessionPage setCurrentPage={navigate} />}
         </View>
       </GestureHandlerRootView>
     </SafeAreaProvider>

@@ -8,13 +8,15 @@ import { findTimeUntil, formatNumPeople, truncateText } from "../../utils/utils"
 type Props = {
   sessionInfo: StudySessionSettings;
   width: number;
-	setModalVisibleWithData: (visible: boolean, data: StudySessionSettings) => void;
+  displayLocationOnly?: boolean;
+  previewCardStyles?: Object;
+  setModalVisibleWithData: (visible: boolean, data: StudySessionSettings) => void;
 };
 
 const StudySessionPreviewCard = (props: Props) => {
-  const { sessionInfo, width, setModalVisibleWithData } = props;
-	const cardWidth = width * 0.4 - 10;
-	const charactersPerLine = Math.round(cardWidth / 7.5);
+  const { sessionInfo, width, displayLocationOnly = false, previewCardStyles = {}, setModalVisibleWithData } = props;
+  const cardWidth = width * 0.4 - 10;
+  const charactersPerLine = Math.round(cardWidth / 7.5);
   return (
     <TouchableOpacity onPress={() => setModalVisibleWithData(true, sessionInfo)}>
       <View style={[styles.studySessionPreviewCard, { width: cardWidth }]}>
@@ -24,30 +26,34 @@ const StudySessionPreviewCard = (props: Props) => {
           numberOfLines={2}
           ellipsizeMode="clip"
         />
-        <StyledH4
-          text={truncateText("🕖 " + findTimeUntil(sessionInfo.startTime), true, charactersPerLine)}
-          numberOfLines={2}
-          ellipsizeMode="clip"
-          style={styles.subText}
-        />
-        <StyledH4
-          text={truncateText("📍 " + sessionInfo.location, true, 18)}
-          numberOfLines={2}
-          ellipsizeMode="clip"
-          style={styles.subText}
-        />
-        <StyledH4
-          text={truncateText(
-            sessionInfo.maxPeople > 1
-              ? "👥 " + formatNumPeople(sessionInfo.maxPeople)
-              : "👤 " + formatNumPeople(sessionInfo.maxPeople),
-            true,
-            20
-          )}
-          numberOfLines={2}
-          ellipsizeMode="clip"
-          style={styles.subText}
-        />
+        {!displayLocationOnly && (
+          <>
+            <StyledH4
+              text={truncateText("🕖 " + findTimeUntil(sessionInfo.startTime), true, charactersPerLine)}
+              numberOfLines={2}
+              ellipsizeMode="clip"
+              style={styles.subText}
+            />
+            <StyledH4
+              text={truncateText("📍 " + sessionInfo.location, true, 18)}
+              numberOfLines={2}
+              ellipsizeMode="clip"
+              style={styles.subText}
+            />
+            <StyledH4
+              text={truncateText(
+                sessionInfo.maxPeople > 1
+                  ? "👥 " + formatNumPeople(sessionInfo.maxPeople)
+                  : "👤 " + formatNumPeople(sessionInfo.maxPeople),
+                true,
+                20
+              )}
+              numberOfLines={2}
+              ellipsizeMode="clip"
+              style={styles.subText}
+            />
+          </>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -59,12 +65,14 @@ const styles = StyleSheet.create({
   studySessionPreviewCard: {
     backgroundColor: Color.darkBlue,
     alignItems: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
     paddingHorizontal: 9,
     paddingVertical: 15,
     borderRadius: 10,
+    justifyContent: "flex-start",
   },
   locationImage: {
+    top: 0,
     marginBottom: 7,
   },
   mainText: {},

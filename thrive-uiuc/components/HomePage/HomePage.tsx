@@ -7,7 +7,7 @@ import { StyledH1, StyledH2, StyledH3, StyledH4 } from "../sharedComponents/Text
 import ProfilePreviewBox from "./ProfilePreviewCard";
 import Color from "../../styles/Color";
 import { ScrollView } from "react-native-gesture-handler";
-import { ProfileSettings, StudySessionSettings } from "../../utils/types";
+import { ProfileSettings, StudySessionSettings, Building, Room } from "../../utils/types";
 import NavBar from "../sharedComponents/NavBar";
 import { PageName } from "../../App";
 import PageHeader from "../sharedComponents/PageHeader";
@@ -15,7 +15,7 @@ import { SafeAreaView } from "react-native";
 import StudySesionInfoModal from "../sharedComponents/StudySessionInfoModal";
 
 type HomePageProps = {
-  currentPage: PageName;
+  currentPage: PageName
   studySessionInfoModalVisible: boolean;
   setCurrentPage: (page: PageName) => void;
   setStudySessionInfoModalVisible: (visible: boolean) => void;
@@ -147,7 +147,7 @@ const profileData: ProfileSettings[] = [
   },
 ];
 
-const studySessionData: StudySessionSettings[] = [
+const studySessionData: StudySessionSettings[] = [ // TODO (9/5/25): Add actual location using type defined in type.tsx 
   {
     id: "1",
     name: "MATH 257 Grind Session Group",
@@ -155,7 +155,7 @@ const studySessionData: StudySessionSettings[] = [
     maxPeople: 2,
     startTime: new Date(Date.now() + 3600000),
     endTime: new Date(Date.now() + 3600000 * 2),
-    location: "Grainger Library",
+    location: null,
   },
   {
     id: "2",
@@ -164,7 +164,7 @@ const studySessionData: StudySessionSettings[] = [
     maxPeople: 1,
     startTime: new Date(Date.now() + 804000000),
     endTime: new Date(Date.now() + 804000000 + 7200000),
-    location: "Funk ACES Library",
+    location: null,
   },
 ];
 
@@ -213,7 +213,7 @@ const HomePage = (props: HomePageProps) => {
             <HomePageButton
               label={startStudySessionButtonLabel}
               onPress={() => {
-                setCurrentPage("meet-new-students-page");
+                setCurrentPage("start-study-session-page");
               }}
             />
           </View>

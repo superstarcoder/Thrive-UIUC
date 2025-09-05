@@ -1,16 +1,19 @@
 import { Image, Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Color from "../../styles/Color";
-import { StudySessionSettings } from "../../utils/types";
+import { ProfileSettings, StudySessionSettings } from "../../utils/types";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import NavBar from "./NavBar";
 import { PageName } from "../../App";
-import { StyledH3, StyledH4 } from "./Text/StyledText";
-import { findDuration, findTimeUntil, formatNumPeople } from "../../utils/utils";
+import { StyledH3, StyledH3p5, StyledH4 } from "./Text/StyledText";
+import { findDuration, findTimeUntil, formatNumPeople, getFormattedDateTimeString } from "../../utils/utils";
 import { X } from "phosphor-react-native";
 import { getRelativeCoords } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type Props = {
+  headerHeight: number;
+  width: number;
   sessionInfo: StudySessionSettings;
   modalVisible: boolean;
   setModalVisible: (visible: boolean) => void;
@@ -19,10 +22,10 @@ type Props = {
 };
 
 const StudySesionInfoModal = (props: Props) => {
-  const { sessionInfo, modalVisible, currentPage, setModalVisible, setCurrentPage } = props;
+  const { headerHeight, width, sessionInfo, modalVisible, currentPage, setModalVisible, setCurrentPage } = props;
+  const insets = useSafeAreaInsets();
   return (
     <Modal
-      style={{ zIndex: 1000 }}
       animationType="fade"
       transparent={true}
       visible={modalVisible}
@@ -33,41 +36,52 @@ const StudySesionInfoModal = (props: Props) => {
         console.log("Modal set visible");
       }}
     >
-      <TouchableOpacity activeOpacity={1} onPress={() => setModalVisible(false)} style={styles.modalBackground}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => setModalVisible(false)}
+        style={[styles.modalBackground, { marginTop: headerHeight - insets.top }]}
+      >
         <TouchableOpacity activeOpacity={1}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <StyledH3 text={sessionInfo.name} />
-              <TouchableOpacity
-                onPress={() => {
-                  setModalVisible(false);
-                }}
-                style={styles.modalButton}
-              >
-                <X color="white" weight="bold" size={20} />
-              </TouchableOpacity>
+          <View style={[styles.modalContent, { width: width * 0.9 }]}>
+            <View>
+              <View style={styles.modalHeader}>
+                <StyledH3 text={"Study Session Details"} />
+                <TouchableOpacity
+                  onPress={() => {
+                    setModalVisible(false);
+                  }}
+                  style={styles.modalButton}
+                >
+                  <X color="white" weight="bold" size={20} />
+                </TouchableOpacity>
+              </View>
+              <StyledH3p5 text={sessionInfo.name} style={{ color: Color.blue, alignSelf: "center" }} />
             </View>
             <View>
               <Text>
                 <StyledH4 text={"🕖 Starts: "} />
                 <StyledH4
-                  text={findTimeUntil(sessionInfo.startTime) + " (" + sessionInfo.startTime.toLocaleString() + ")"}
+                  text={
+                    findTimeUntil(sessionInfo.startTime) +
+                    " (" +
+                    getFormattedDateTimeString(sessionInfo.startTime) +
+                    ")"
+                  }
                   style={styles.subText}
                 />
               </Text>
               <Text>
                 <StyledH4 text={"🕖 Ends: "} />
                 <StyledH4
-                  text={findTimeUntil(sessionInfo.endTime) + " (" + sessionInfo.endTime.toLocaleString() + ")"}
+                  text={
+                    findTimeUntil(sessionInfo.endTime) + " (" + getFormattedDateTimeString(sessionInfo.endTime) + ")"
+                  }
                   style={styles.subText}
                 />
               </Text>
-							<Text>
+              <Text>
                 <StyledH4 text={"🕖 Duration: "} />
-                <StyledH4
-                  text={findDuration(sessionInfo.startTime, sessionInfo.endTime)}
-                  style={styles.subText}
-                />
+                <StyledH4 text={findDuration(sessionInfo.startTime, sessionInfo.endTime)} style={styles.subText} />
               </Text>
               <Text>
                 <StyledH4 text={"📍 Location: "} />
@@ -78,11 +92,24 @@ const StudySesionInfoModal = (props: Props) => {
                 <StyledH4 text={formatNumPeople(sessionInfo.maxPeople)} style={styles.subText} />
               </Text>
             </View>
-						<Image source={require("../../assets/testing/Grainger.png")} style={styles.locationImage} />
+            <Image source={require("../../assets/testing/Grainger.png")} style={styles.locationImage} />
           </View>
         </TouchableOpacity>
       </TouchableOpacity>
-      <NavBar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <NavBar
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        ownProfileSettings={{
+          id: "",
+          name: "",
+          year: null,
+          major: null,
+          introduction: "",
+          hobbies: [],
+          classes: [],
+        }}
+        setCurrentlyViewingProfileSettings={function (profileSettings: ProfileSettings): void {}}
+      />
     </Modal>
   );
 };
@@ -96,23 +123,27 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0,0,0,0.5)",
-    marginTop: 40,
     marginBottom: 50,
   },
   modalContent: {
-    width: "100%",
     padding: 20,
     backgroundColor: Color.darkBlue,
     borderRadius: 10,
     boxShadow: "0px 0px 4px 0px rgba(0,0,0,1)",
-		gap: 5
+    gap: 5,
   },
   modalHeader: {
     flexDirection: "row",
-    alignItems: "flex-end",
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
+    textAlign: "center",
   },
   modalButton: {
-    padding: 5,
+    paddingTop: 2,
+    paddingBottom: 20,
+    paddingRight: 0,
+    paddingLeft: 5,
     position: "absolute",
     top: 0,
     right: 0,

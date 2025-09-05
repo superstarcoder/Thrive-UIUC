@@ -19,126 +19,131 @@ type HomePageProps = {
   studySessionInfoModalVisible: boolean;
   setCurrentPage: (page: PageName) => void;
   setStudySessionInfoModalVisible: (visible: boolean) => void;
+  ownProfileSettings: ProfileSettings;
+  setCurrentlyViewingProfileSettings: (profileSettings: ProfileSettings) => void;
   handleBackAction: () => void;
 };
 
 const profileData: ProfileSettings[] = [
   {
-    id: "1",
-    name: "Lei",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
-  },
-  {
     id: "2",
-    name: "Dhanish",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
+    name: "William Lei",
+    year: "Freshman",
+    major: "Computer Engineering",
+    introduction:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Quis massa ultrices donec at nisl vehicula maecenas ex amet varius maximus integer massa urna finibus gravida lacinia dapibus vulputate lacinia eleifend blandit venenatis elementum nulla placerat tortor dignissim risus vel nam vestibulum rhoncus consequat metus himenaeos class maximus vitae fusce imperdiet quisque convallis leo et class consequat montes dictum fames vulputate augue scelerisque justo porta etiam ultricies platea mus sit aenean posuere libero consectetur scelerisque primis nibh maximus congue egestas mauris hac dolor amet congue pretium fusce tempus quisque taciti dictum nascetur tincidunt pellentesque id turpis habitasse ligula felis volutpat rutrum rhoncus cursus semper vitae malesuada ultricies natoque est consequat potenti laoreet erat habitasse eros ex duis dignissim molestie posuere interdum potenti.",
+    hobbies: ["boxing"],
+    classes: ["CS 233"],
   },
   {
     id: "3",
-    name: "Harith",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
+    name: "Harith Palani",
+    year: "Junior",
+    major: "Aerospace Engineering",
+    introduction:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Quis massa ultrices donec at nisl vehicula maecenas ex amet varius maximus integer massa urna finibus gravida lacinia dapibus vulputate lacinia eleifend blandit venenatis elementum nulla placerat tortor dignissim risus vel nam vestibulum rhoncus consequat metus himenaeos class maximus vitae fusce imperdiet quisque convallis leo et class consequat montes dictum fames vulputate augue scelerisque justo porta etiam ultricies platea mus sit aenean posuere libero consectetur scelerisque primis nibh maximus congue egestas mauris hac dolor amet congue pretium fusce tempus quisque taciti dictum nascetur tincidunt pellentesque id turpis habitasse ligula felis volutpat rutrum rhoncus cursus semper vitae malesuada ultricies natoque est consequat potenti laoreet erat habitasse eros ex duis dignissim molestie posuere interdum potenti.",
+    hobbies: ["biking"],
+    classes: ["CS 233", "MATH 257", "ENG 199", "ENG 201", "CS 225"],
   },
   {
     id: "4",
-    name: "Sally",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
+    name: "Sophia Zhang",
+    year: "Sophomore",
+    major: "Computer Engineering",
+    introduction:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Quis massa ultrices donec at nisl vehicula maecenas ex amet varius maximus integer massa urna finibus gravida lacinia dapibus vulputate lacinia eleifend blandit venenatis elementum nulla placerat tortor dignissim risus vel nam vestibulum rhoncus consequat metus himenaeos class maximus vitae fusce imperdiet quisque convallis leo et class consequat montes dictum fames vulputate augue scelerisque justo porta etiam ultricies platea mus sit aenean posuere libero consectetur scelerisque primis nibh maximus congue egestas mauris hac dolor amet congue pretium fusce tempus quisque taciti dictum nascetur tincidunt pellentesque id turpis habitasse ligula felis volutpat rutrum rhoncus cursus semper vitae malesuada ultricies natoque est consequat potenti laoreet erat habitasse eros ex duis dignissim molestie posuere interdum potenti.",
+    hobbies: ["badminton"],
+    classes: ["CS 233", "MATH 257"],
   },
   {
     id: "5",
-    name: "Steven",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
+    name: "Liam Patel",
+    year: "Senior",
+    major: "Aerospace Engineering",
+    introduction:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Quis massa ultrices donec at nisl vehicula maecenas ex amet varius maximus integer massa urna finibus gravida lacinia dapibus vulputate lacinia eleifend blandit venenatis elementum nulla placerat tortor dignissim risus vel nam vestibulum rhoncus consequat metus himenaeos class maximus vitae fusce imperdiet quisque convallis leo et class consequat montes dictum fames vulputate augue scelerisque justo porta etiam ultricies platea mus sit aenean posuere libero consectetur scelerisque primis nibh maximus congue egestas mauris hac dolor amet congue pretium fusce tempus quisque taciti dictum nascetur tincidunt pellentesque id turpis habitasse ligula felis volutpat rutrum rhoncus cursus semper vitae malesuada ultricies natoque est consequat potenti laoreet erat habitasse eros ex duis dignissim molestie posuere interdum potenti.",
+    hobbies: ["biking"],
+    classes: ["CS 225", "ENG 201"],
   },
   {
     id: "6",
-    name: "Josephine",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
+    name: "Emily Chen",
+    year: "Freshman",
+    major: "Computer Engineering",
+    introduction:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Quis massa ultrices donec at nisl vehicula maecenas ex amet varius maximus integer massa urna finibus gravida lacinia dapibus vulputate lacinia eleifend blandit venenatis elementum nulla placerat tortor dignissim risus vel nam vestibulum rhoncus consequat metus himenaeos class maximus vitae fusce imperdiet quisque convallis leo et class consequat montes dictum fames vulputate augue scelerisque justo porta etiam ultricies platea mus sit aenean posuere libero consectetur scelerisque primis nibh maximus congue egestas mauris hac dolor amet congue pretium fusce tempus quisque taciti dictum nascetur tincidunt pellentesque id turpis habitasse ligula felis volutpat rutrum rhoncus cursus semper vitae malesuada ultricies natoque est consequat potenti laoreet erat habitasse eros ex duis dignissim molestie posuere interdum potenti.",
+    hobbies: ["boxing"],
+    classes: ["CS 233"],
   },
   {
     id: "7",
-    name: "Extremely super duper long test string tomakesurethattheoverflowstylingiscorrectfortestingpurposes",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
+    name: "Noah Rivera",
+    year: "Junior",
+    major: "Aerospace Engineering",
+    introduction:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Quis massa ultrices donec at nisl vehicula maecenas ex amet varius maximus integer massa urna finibus gravida lacinia dapibus vulputate lacinia eleifend blandit venenatis elementum nulla placerat tortor dignissim risus vel nam vestibulum rhoncus consequat metus himenaeos class maximus vitae fusce imperdiet quisque convallis leo et class consequat montes dictum fames vulputate augue scelerisque justo porta etiam ultricies platea mus sit aenean posuere libero consectetur scelerisque primis nibh maximus congue egestas mauris hac dolor amet congue pretium fusce tempus quisque taciti dictum nascetur tincidunt pellentesque id turpis habitasse ligula felis volutpat rutrum rhoncus cursus semper vitae malesuada ultricies natoque est consequat potenti laoreet erat habitasse eros ex duis dignissim molestie posuere interdum potenti.",
+    hobbies: ["badminton"],
+    classes: ["CS 233", "MATH 257", "ENG 199"],
   },
   {
     id: "8",
-    name: "Marley",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
+    name: "Ava Kim",
+    year: "Sophomore",
+    major: "Computer Engineering",
+    introduction:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Quis massa ultrices donec at nisl vehicula maecenas ex amet varius maximus integer massa urna finibus gravida lacinia dapibus vulputate lacinia eleifend blandit venenatis elementum nulla placerat tortor dignissim risus vel nam vestibulum rhoncus consequat metus himenaeos class maximus vitae fusce imperdiet quisque convallis leo et class consequat montes dictum fames vulputate augue scelerisque justo porta etiam ultricies platea mus sit aenean posuere libero consectetur scelerisque primis nibh maximus congue egestas mauris hac dolor amet congue pretium fusce tempus quisque taciti dictum nascetur tincidunt pellentesque id turpis habitasse ligula felis volutpat rutrum rhoncus cursus semper vitae malesuada ultricies natoque est consequat potenti laoreet erat habitasse eros ex duis dignissim molestie posuere interdum potenti.",
+    hobbies: ["biking"],
+    classes: ["CS 225", "ENG 201"],
   },
   {
     id: "9",
-    name: "Kendrick Lamar",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
+    name: "Ethan Martinez",
+    year: "Senior",
+    major: "Aerospace Engineering",
+    introduction:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Quis massa ultrices donec at nisl vehicula maecenas ex amet varius maximus integer massa urna finibus gravida lacinia dapibus vulputate lacinia eleifend blandit venenatis elementum nulla placerat tortor dignissim risus vel nam vestibulum rhoncus consequat metus himenaeos class maximus vitae fusce imperdiet quisque convallis leo et class consequat montes dictum fames vulputate augue scelerisque justo porta etiam ultricies platea mus sit aenean posuere libero consectetur scelerisque primis nibh maximus congue egestas mauris hac dolor amet congue pretium fusce tempus quisque taciti dictum nascetur tincidunt pellentesque id turpis habitasse ligula felis volutpat rutrum rhoncus cursus semper vitae malesuada ultricies natoque est consequat potenti laoreet erat habitasse eros ex duis dignissim molestie posuere interdum potenti.",
+    hobbies: ["boxing"],
+    classes: ["CS 233", "ENG 199"],
   },
   {
     id: "10",
-    name: "Peter L. Smithson",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
+    name: "Isabella Singh",
+    year: "Freshman",
+    major: "Computer Engineering",
+    introduction:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Quis massa ultrices donec at nisl vehicula maecenas ex amet varius maximus integer massa urna finibus gravida lacinia dapibus vulputate lacinia eleifend blandit venenatis elementum nulla placerat tortor dignissim risus vel nam vestibulum rhoncus consequat metus himenaeos class maximus vitae fusce imperdiet quisque convallis leo et class consequat montes dictum fames vulputate augue scelerisque justo porta etiam ultricies platea mus sit aenean posuere libero consectetur scelerisque primis nibh maximus congue egestas mauris hac dolor amet congue pretium fusce tempus quisque taciti dictum nascetur tincidunt pellentesque id turpis habitasse ligula felis volutpat rutrum rhoncus cursus semper vitae malesuada ultricies natoque est consequat potenti laoreet erat habitasse eros ex duis dignissim molestie posuere interdum potenti.",
+    hobbies: ["badminton"],
+    classes: ["CS 233"],
   },
   {
     id: "11",
-    name: "Bartholomew Huckleberry",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
+    name: "Mason Gupta",
+    year: "Junior",
+    major: "Aerospace Engineering",
+    introduction:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Quis massa ultrices donec at nisl vehicula maecenas ex amet varius maximus integer massa urna finibus gravida lacinia dapibus vulputate lacinia eleifend blandit venenatis elementum nulla placerat tortor dignissim risus vel nam vestibulum rhoncus consequat metus himenaeos class maximus vitae fusce imperdiet quisque convallis leo et class consequat montes dictum fames vulputate augue scelerisque justo porta etiam ultricies platea mus sit aenean posuere libero consectetur scelerisque primis nibh maximus congue egestas mauris hac dolor amet congue pretium fusce tempus quisque taciti dictum nascetur tincidunt pellentesque id turpis habitasse ligula felis volutpat rutrum rhoncus cursus semper vitae malesuada ultricies natoque est consequat potenti laoreet erat habitasse eros ex duis dignissim molestie posuere interdum potenti.",
+    hobbies: ["biking"],
+    classes: ["CS 233", "MATH 257", "ENG 199", "ENG 201"],
   },
   {
     id: "12",
-    name: "V",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
+    name: "Olivia Brown",
+    year: "Sophomore",
+    major: "Computer Engineering",
+    introduction:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Quis massa ultrices donec at nisl vehicula maecenas ex amet varius maximus integer massa urna finibus gravida lacinia dapibus vulputate lacinia eleifend blandit venenatis elementum nulla placerat tortor dignissim risus vel nam vestibulum rhoncus consequat metus himenaeos class maximus vitae fusce imperdiet quisque convallis leo et class consequat montes dictum fames vulputate augue scelerisque justo porta etiam ultricies platea mus sit aenean posuere libero consectetur scelerisque primis nibh maximus congue egestas mauris hac dolor amet congue pretium fusce tempus quisque taciti dictum nascetur tincidunt pellentesque id turpis habitasse ligula felis volutpat rutrum rhoncus cursus semper vitae malesuada ultricies natoque est consequat potenti laoreet erat habitasse eros ex duis dignissim molestie posuere interdum potenti.",
+    hobbies: ["boxing"],
+    classes: ["CS 233", "MATH 257"],
   },
   {
     id: "13",
-    name: "William",
-    year: null,
-    major: null,
-    introduction: "",
-    hobbies: [],
-    classes: [],
+    name: "James Lee",
+    year: "Senior",
+    major: "Aerospace Engineering",
+    introduction:
+      "Lorem ipsum odor amet, consectetuer adipiscing elit. Quis massa ultrices donec at nisl vehicula maecenas ex amet varius maximus integer massa urna finibus gravida lacinia dapibus vulputate lacinia eleifend blandit venenatis elementum nulla placerat tortor dignissim risus vel nam vestibulum rhoncus consequat metus himenaeos class maximus vitae fusce imperdiet quisque convallis leo et class consequat montes dictum fames vulputate augue scelerisque justo porta etiam ultricies platea mus sit aenean posuere libero consectetur scelerisque primis nibh maximus congue egestas mauris hac dolor amet congue pretium fusce tempus quisque taciti dictum nascetur tincidunt pellentesque id turpis habitasse ligula felis volutpat rutrum rhoncus cursus semper vitae malesuada ultricies natoque est consequat potenti laoreet erat habitasse eros ex duis dignissim molestie posuere interdum potenti.",
+    hobbies: ["badminton"],
+    classes: ["CS 225", "ENG 201", "MATH 257"],
   },
 ];
 
@@ -165,11 +170,13 @@ const studySessionData: StudySessionSettings[] = [
 
 const HomePage = (props: HomePageProps) => {
   const {
+    ownProfileSettings,
     currentPage,
     studySessionInfoModalVisible,
     setCurrentPage,
     handleBackAction,
     setStudySessionInfoModalVisible,
+    setCurrentlyViewingProfileSettings,
   } = props;
   const meetNewStudentsButtonLabel = "Meet New Students 👋";
   const startStudySessionButtonLabel = "Start a Study Session 📚";
@@ -177,19 +184,22 @@ const HomePage = (props: HomePageProps) => {
   const yourNetworkHeading = "Your Network";
   const { width } = useWindowDimensions();
   const [studySessionInfoModalData, setStudySessionInfoModalData] = useState<StudySessionSettings>(studySessionData[0]);
+  const [headerHeight, setHeaderHeight] = useState(0);
 
   return (
     <SafeAreaView style={sharedStyles.androidSafeAreaContainer}>
       <StatusBar barStyle="light-content" backgroundColor={Color.darkestBlue} />
-      <PageHeader header="Home" handleBackAction={handleBackAction} />
+      <PageHeader header="Home" handleBackAction={handleBackAction} setHeaderHeight={setHeaderHeight} />
       <StudySesionInfoModal
+        headerHeight={headerHeight}
+        width={width}
         sessionInfo={studySessionInfoModalData}
         modalVisible={studySessionInfoModalVisible}
         setModalVisible={setStudySessionInfoModalVisible}
         setCurrentPage={setCurrentPage}
         currentPage="home-page"
       />
-      <ScrollView overScrollMode="never" contentContainerStyle={styles.scrollContainer}>
+      <ScrollView overScrollMode="auto" contentContainerStyle={styles.scrollContainer}>
         <View style={[sharedStyles.pageContainer, styles.homePage]}>
           <View style={styles.homePageButtons}>
             {/* Meet New Students Button */}
@@ -218,11 +228,21 @@ const HomePage = (props: HomePageProps) => {
           </View>
           <View style={styles.homePageSectionBox}>
             <StyledH3 text={yourNetworkHeading} />
-            <YourNetworkBox profileData={profileData} width={width} />
+            <YourNetworkBox
+              profileData={profileData}
+              width={width}
+              setCurrentPage={setCurrentPage}
+              setCurrentlyViewingProfileSettings={setCurrentlyViewingProfileSettings}
+            />
           </View>
         </View>
       </ScrollView>
-      <NavBar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <NavBar
+        ownProfileSettings={ownProfileSettings}
+        setCurrentlyViewingProfileSettings={setCurrentlyViewingProfileSettings}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </SafeAreaView>
   );
 };
@@ -269,14 +289,22 @@ const UpcomingStudySessionsBox = (props: UpcomingStudySessionBoxProps) => {
 
 type YourNetworkBoxProps = {
   profileData: ProfileSettings[];
+  setCurrentlyViewingProfileSettings: (profileSettings: ProfileSettings) => void;
+  setCurrentPage: (page: PageName) => void;
   width: number;
 };
 const YourNetworkBox = (props: YourNetworkBoxProps) => {
-  const { width } = props;
+  const { width, setCurrentlyViewingProfileSettings, setCurrentPage } = props;
   return (
     <View style={[styles.profileList, { width: width * 0.8 }]}>
       {profileData.map((item, index) => (
-        <ProfilePreviewBox profileName={item.name} key={index} width={width} />
+        <ProfilePreviewBox
+          setCurrentPage={setCurrentPage}
+          setCurrentlyViewingProfileSettings={setCurrentlyViewingProfileSettings}
+          profileSettings={item}
+          key={index}
+          width={width}
+        />
       ))}
     </View>
   );

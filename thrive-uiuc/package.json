@@ -4,11 +4,13 @@
   "main": "index.ts",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
+    "expo": "53.0.22",
+    "expo-status-bar": "~2.2.3",
     "expo": "53.0.22",
     "expo-status-bar": "~2.2.3",
     "ngrok": "^5.0.0-beta.2",
@@ -17,6 +19,7 @@
     "react-native": "0.79.5",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-reanimated": "~3.17.4",
+    "react-native-safe-area-context": "^5.6.1",
     "react-native-shadow-2": "^7.1.1",
     "react-native-svg": "15.11.2"
   },
@@ -24,10 +27,10 @@
     "@babel/core": "^7.25.2",
     "@tsconfig/react-native": "^3.0.5",
     "@types/jest": "^29.5.14",
-    "@types/react": "^19.0.0",
+    "@types/react": "~19.0.10",
     "@types/react-test-renderer": "^19.0.0",
     "metro-config": "^0.81.0",
-    "typescript": "^5.7.2"
+    "typescript": "~5.8.3"
   },
   "private": true
 }

@@ -2,19 +2,34 @@ import { GestureResponderEvent, Image, StyleSheet, Text, TouchableOpacity, View 
 import React from "react";
 import { Class, Hobby, Major, ProfileSettings, Year } from "../../utils/types";
 import sharedStyles from "../../styles/SharedStyles";
-import { StyledH2, StyledH3, StyledH4 } from "./Text/StyledText";
+import { StyledH2, StyledH3, StyledH3p5, StyledH4 } from "./Text/StyledText";
 import Color from "../../styles/Color";
 import Tag, { HOBBY_TAG_DATA } from "./Tag";
+import { PageName } from "../../App";
 
 // truncated: true (default) = introduction cut off, false = introduction fully shown
 // connectable: true (default) = connect/ignore buttons shown, false = connect/ignore buttons hidden
 type ProfileCardProps = {
   profileSettings: ProfileSettings;
+  setCurrentlyViewingProfileSettings: (profileSettings: ProfileSettings) => void;
+  setCurrentPage: (pageName: PageName) => void;
   truncated?: boolean;
+  connected?: boolean;
   connectable?: boolean;
+  ownProfile?: boolean;
+  fullProfile?: boolean;
 };
 
-const ProfileCard = ({ profileSettings, truncated = true, connectable = true }: ProfileCardProps) => {
+const ProfileCard = ({
+  profileSettings,
+  truncated = true,
+  connectable = true,
+  fullProfile = false,
+  connected = false,
+  ownProfile = false,
+  setCurrentPage,
+  setCurrentlyViewingProfileSettings,
+}: ProfileCardProps) => {
   return (
     <View style={styles.profileCard}>
       <View style={styles.profileDetails}>
@@ -23,11 +38,13 @@ const ProfileCard = ({ profileSettings, truncated = true, connectable = true }: 
         <ClassesArea classes={profileSettings.classes} />
         <HobbiesArea hobbies={profileSettings.hobbies} />
         <IntroArea
+          profileSettings={profileSettings}
           introduction={profileSettings.introduction}
           truncated={truncated}
-          onViewFullProfilePress={() => null}
+          setCurrentPage={setCurrentPage}
+          setCurrentlyViewingProfileSettings={setCurrentlyViewingProfileSettings}
         />
-        {connectable && <ConnectIgnoreArea onConnectPress={() => null} onIgnorePress={() => null} />}
+        {connectable && !fullProfile && !ownProfile && <ConnectIgnoreArea onConnectPress={() => null} onIgnorePress={() => null} />}
       </View>
     </View>
   );
@@ -45,8 +62,8 @@ const ProfileHeader = (props: ProfileHeaderProps) => {
   return (
     <View style={styles.profileCardHeader}>
       <Image source={require("../../assets/testing/DefaultProfileImage.jpg")} style={styles.profileImage} />
-      <View>
-        <StyledH2 text={name} numberOfLines={1} ellipsizeMode="tail" />
+      <View style={{ marginTop: 1 }}>
+        <StyledH3 text={name} numberOfLines={1} ellipsizeMode="tail" />
         <StyledH4 text={year} style={styles.profileCardHeaderYearText} />
       </View>
     </View>
@@ -109,13 +126,15 @@ const HobbiesArea = (props: HobbiesAreaProps) => {
 };
 
 type IntroAreaProps = {
+  profileSettings: ProfileSettings;
   introduction: string;
   truncated: boolean;
-  onViewFullProfilePress: (event: GestureResponderEvent) => void;
+  setCurrentlyViewingProfileSettings: (profileSettings: ProfileSettings) => void;
+  setCurrentPage: (pageName: PageName) => void;
 };
 
 const IntroArea = (props: IntroAreaProps) => {
-  const { introduction, truncated, onViewFullProfilePress } = props;
+  const { profileSettings, introduction, truncated, setCurrentPage, setCurrentlyViewingProfileSettings } = props;
   const introAreaLabel = "Intro: ";
   const viewFullProfileButtonLabel = "View Full Profile";
 
@@ -125,16 +144,19 @@ const IntroArea = (props: IntroAreaProps) => {
         <StyledH4 text={introAreaLabel} />
         <StyledH4 text={introduction} style={styles.profileCardIntroAreaBodyText} />
       </Text>
-      {truncated ? (
+      {truncated && (
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity
             style={[sharedStyles.blueButton, styles.profileCardViewFullProfileButton]}
-            onPress={onViewFullProfilePress}
+            onPress={() => {
+              setCurrentlyViewingProfileSettings(profileSettings);
+							setCurrentPage("profile-page");
+            }}
           >
             <StyledH4 style={styles.profileCardViewFullProfileButtonText} text={viewFullProfileButtonLabel} />
           </TouchableOpacity>
         </View>
-      ) : null}
+      )}
     </View>
   );
 };
@@ -151,13 +173,13 @@ const ConnectIgnoreArea = (props: ConnectIgnoreAreaProps) => {
   return (
     <View style={styles.profileCardConnectIgnoreArea}>
       <TouchableOpacity style={[sharedStyles.blueButton, { minWidth: 100 }]} onPress={onConnectPress}>
-        <StyledH3 style={styles.profileCardConnectIgnoreButtonText} text={connectButtonLabel} />
+        <StyledH3p5 style={styles.profileCardConnectIgnoreButtonText} text={connectButtonLabel} />
       </TouchableOpacity>
       <TouchableOpacity
         style={[sharedStyles.blueButton, { minWidth: 100, paddingHorizontal: 20, backgroundColor: Color.orange }]}
         onPress={onIgnorePress}
       >
-        <StyledH3 style={styles.profileCardConnectIgnoreButtonText} text={ignoreButtonLabel} />
+        <StyledH3p5 style={styles.profileCardConnectIgnoreButtonText} text={ignoreButtonLabel} />
       </TouchableOpacity>
     </View>
   );

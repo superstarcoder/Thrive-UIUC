@@ -5,19 +5,22 @@ import { House, User } from "phosphor-react-native";
 import sharedStyles from "../../styles/SharedStyles";
 import { StyledH3 } from "./Text/StyledText";
 import { PageName } from "../../App";
+import { ProfileSettings } from "../../utils/types";
 
 type Props = {
   currentPage: PageName;
+	ownProfileSettings: ProfileSettings;
+	setCurrentlyViewingProfileSettings: (profileSettings: ProfileSettings) => void;
   setCurrentPage: (page: PageName) => void;
 };
 
 const NavBar = (props: Props) => {
-  const { currentPage, setCurrentPage } = props;
+  const { currentPage, ownProfileSettings, setCurrentPage, setCurrentlyViewingProfileSettings } = props;
   const label = "Home";
   return (
     <View style={styles.navBar}>
       <TouchableOpacity
-        style={[styles.navBarButton,currentPage === "home-page" ? {borderTopWidth: 3} : {borderTopWidth: 0} ]}
+        style={[styles.navBarButton, currentPage === "home-page" ? { borderTopWidth: 3 } : { borderTopWidth: 0 }]}
         onPress={() => {
           setCurrentPage("home-page");
         }}
@@ -27,7 +30,8 @@ const NavBar = (props: Props) => {
       <TouchableOpacity
         style={styles.navBarButton}
         onPress={() => {
-          setCurrentPage("create-profile-page");
+          setCurrentPage("profile-page");
+					setCurrentlyViewingProfileSettings(ownProfileSettings);
         }}
       >
         <User color="white" size="34px" weight={currentPage === "create-profile-page" ? "fill" : "regular"}></User>
@@ -51,7 +55,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    gap: 100
+    gap: 100,
+    zIndex: 1000,
   },
   navBarButton: {
     height: "100%",
@@ -59,6 +64,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     alignContent: "center",
     alignItems: "center",
-    borderTopColor: "white"
+    borderTopColor: "white",
   },
 });

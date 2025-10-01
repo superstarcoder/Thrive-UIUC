@@ -116,6 +116,7 @@ const openGroupStudyRooms: Room[] = [
   },
 ];
 
+
 const ideaLabStudyRooms: Room[] = [
   {
     id: "8",
@@ -159,9 +160,33 @@ const graingerRoomCategories: LocationCategory[] = [
 export const sampleBuildings: Building[] = [
   {
     id: "0",
-    name: "Grainger Engineering Library",
-    subCategories: graingerRoomCategories,
+    name: "Main Library",
+    minCapacity: 1,
+    maxCapacity: 500,
+    openingTime: new Date("2024-01-01T08:00:00"),
+    closingTime: new Date("2024-01-01T22:00:00"),
+    image: require("../../assets/images/main_library.jpg"),
   },
+  {
+    id: "1",
+    name: "Funk ACES Library",
+    minCapacity: 1,
+    maxCapacity: 200,
+    openingTime: new Date("2024-01-01T09:00:00"),
+    closingTime: new Date("2024-01-01T18:00:00"),
+    image: require("../../assets/images/funk_aces_library.jpg"),
+  },
+  {
+    id: "2",
+    name: "Grainger Library",
+    minCapacity: 1,
+    maxCapacity: 300,
+    openingTime: new Date("2024-01-01T07:00:00"),
+    closingTime: new Date("2024-01-01T23:00:00"),
+    image: require("../../assets/images/grainger_library.jpg"),
+    rooms: [...openGroupStudyRooms, ...ideaLabStudyRooms],
+    subCategories: graingerRoomCategories,
+  }
 ];
 
 // if name is PARENT, then we know it's the parent of all locations

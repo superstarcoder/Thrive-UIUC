@@ -40,7 +40,7 @@ const BottomSheet = React.forwardRef(
         active.value = true;
       }
 
-      translateY.value = withSpring(percent * MAX_TRANSLATE_Y, { damping: 15 });
+      translateY.value = withSpring(percent * MAX_TRANSLATE_Y, { damping: 80 });
     }, []);
 
     const isActive = useCallback(() => {

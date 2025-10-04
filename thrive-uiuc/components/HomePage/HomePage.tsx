@@ -15,7 +15,7 @@ import { SafeAreaView } from "react-native";
 import StudySesionInfoModal from "../sharedComponents/StudySessionInfoModal";
 
 type HomePageProps = {
-  currentPage: PageName
+  currentPage: PageName;
   studySessionInfoModalVisible: boolean;
   setCurrentPage: (page: PageName) => void;
   setStudySessionInfoModalVisible: (visible: boolean) => void;
@@ -147,7 +147,8 @@ const profileData: ProfileSettings[] = [
   },
 ];
 
-const studySessionData: StudySessionSettings[] = [ // TODO (9/5/25): Add actual location using type defined in type.tsx 
+const studySessionData: StudySessionSettings[] = [
+  // TODO (9/5/25): Add actual location using type defined in type.tsx
   {
     id: "1",
     name: "MATH 257 Grind Session Group",
@@ -155,7 +156,21 @@ const studySessionData: StudySessionSettings[] = [ // TODO (9/5/25): Add actual 
     maxPeople: 2,
     startTime: new Date(Date.now() + 3600000),
     endTime: new Date(Date.now() + 3600000 * 2),
-    location: null,
+    location: {
+      id: "101",
+      name: "Room 101",
+      minCapacity: 1,
+      maxCapacity: 4,
+      building: {
+        id: "1",
+        name: "Main Library",
+        minCapacity: 50,
+        maxCapacity: 200,
+        openingTime: new Date(new Date().setHours(8, 0, 0)), // 8:00 AM
+        closingTime: new Date(new Date().setHours(22, 0, 0)), // 10:00 PM
+        // image: require("../../../assets/building_images/main_library.jpg"),
+      }
+    },
   },
   {
     id: "2",

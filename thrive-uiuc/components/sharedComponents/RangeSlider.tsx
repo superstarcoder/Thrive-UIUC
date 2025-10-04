@@ -12,17 +12,36 @@ Animated.addWhitelistedNativeProps({ text: true });
 type Props = {
   min: number;
   max: number;
+  initValue1: number;
+  initValue2: number;
   onValue1Change: (newVal: number) => void;
   onValue2Change: (newVal: number) => void;
 };
 
-const RangeSlider = ({ min, max, onValue1Change, onValue2Change }: Props) => {
-  const offsetValue1 = useSharedValue(0);
-  const offsetValue1Snapped = useSharedValue(0);
-  const offsetValue2Snapped = useSharedValue(0);
-  const offsetValue2 = useSharedValue(SLIDER_WIDTH - SLIDER_HANDLE_RADIUS);
-  const MAX_VALUE = SLIDER_WIDTH - SLIDER_HANDLE_RADIUS;
+// number = percentage * (max - min) + min
+// percentage = (number - min) / (max - min)
+// slider position = percentage * MAX_VALUE
+// offsetValue is the slider position based on calculations
+// offsetValueSnapped is the slider position snapped to the nearest value within the range of possible values
+
+const RangeSlider = ({ min, max, initValue1, initValue2, onValue1Change, onValue2Change }: Props) => {
+
+  // calculate initial positions
+
   const MIN_VALUE = 0;
+  const MAX_VALUE = SLIDER_WIDTH - SLIDER_HANDLE_RADIUS;
+  const initPercent1 = (initValue1 - min) / (max - min);
+  const initPercent2 = (initValue2 - min) / (max - min);
+
+  const initPos1 = initPercent1 * (MAX_VALUE);
+  const initPos2 = initPercent2 * (MAX_VALUE);
+
+  const offsetValue1 = useSharedValue(initPos1);
+  const offsetValue1Snapped = useSharedValue(initPos1);
+  const offsetValue2 = useSharedValue(initPos2);
+  const offsetValue2Snapped = useSharedValue(initPos2);
+
+  // const offsetValue2 = useSharedValue(SLIDER_WIDTH - SLIDER_HANDLE_RADIUS);
 
   const pan1 = Gesture.Pan().onChange((event) => {
     offsetValue1.value += event.changeX;

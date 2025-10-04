@@ -24,8 +24,8 @@ export type Props = {
 const defaultStudySessionSettings: StudySessionSettings = {
   id: "0",
   name: "",
-  minPeople: 2,
-  maxPeople: 5,
+  minPeople: 1,
+  maxPeople: 3,
   startTime: new Date(Date.now() + 80400000),
   endTime: new Date(Date.now() + 262800000),
   location: null,
@@ -103,10 +103,10 @@ const StartStudySessionModal = ({ onSavePress }: Props) => {
                 <StyledH4 text="(min - max)" style={styles.subtitle} />
               </View>
               <StyledH3 text={`${studySessionSettings.minPeople} - ${studySessionSettings.maxPeople} people`} />
-              <RangeSlider min={0} max={10} onValue1Change={updateMinPeople} onValue2Change={updateMaxPeople} />
+              <RangeSlider min={1} max={10} initValue1={1} initValue2={3} onValue1Change={updateMinPeople} onValue2Change={updateMaxPeople} />
             </FormFieldContainer>
 
-            {/* TODO: work on making work so you can invite other ppl from ur network. */}
+            {/* TODO: work on making it work so you can invite other ppl from ur network. */}
             {/* <FormFieldContainer>
               <StyledH3 text="Invite People From Your Network*" />
               <TextInputDropDown

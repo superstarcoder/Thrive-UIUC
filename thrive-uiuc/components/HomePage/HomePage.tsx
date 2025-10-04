@@ -168,7 +168,7 @@ const studySessionData: StudySessionSettings[] = [
         maxCapacity: 200,
         openingTime: new Date(new Date().setHours(8, 0, 0)), // 8:00 AM
         closingTime: new Date(new Date().setHours(22, 0, 0)), // 10:00 PM
-        image: require("../../../assets/building_images/main_library.jpg"),
+        // image: require("../../../assets/building_images/main_library.jpg"),
       }
     },
   },

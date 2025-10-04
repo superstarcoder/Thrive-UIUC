@@ -165,7 +165,7 @@ export const sampleBuildings: Building[] = [
     maxCapacity: 500,
     openingTime: new Date("2024-01-01T08:00:00"),
     closingTime: new Date("2024-01-01T22:00:00"),
-    image: require("../../assets/images/main_library.jpg"),
+    // image: require("../../assets/images/main_library.jpg"),
   },
   {
     id: "1",
@@ -174,7 +174,7 @@ export const sampleBuildings: Building[] = [
     maxCapacity: 200,
     openingTime: new Date("2024-01-01T09:00:00"),
     closingTime: new Date("2024-01-01T18:00:00"),
-    image: require("../../assets/images/funk_aces_library.jpg"),
+    // image: require("../../assets/images/funk_aces_library.jpg"),
   },
   {
     id: "2",
@@ -183,7 +183,7 @@ export const sampleBuildings: Building[] = [
     maxCapacity: 300,
     openingTime: new Date("2024-01-01T07:00:00"),
     closingTime: new Date("2024-01-01T23:00:00"),
-    image: require("../../assets/images/grainger_library.jpg"),
+    // image: require("../../assets/images/grainger_library.jpg"),
     rooms: [...openGroupStudyRooms, ...ideaLabStudyRooms],
     subCategories: graingerRoomCategories,
   }

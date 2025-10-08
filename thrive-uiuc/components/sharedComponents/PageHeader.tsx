@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Color from "../../styles/Color";
 import { StyledH0, StyledH1, StyledH2 } from "./Text/StyledText";
@@ -22,7 +22,7 @@ const PageHeader = ({
   const insets = useSafeAreaInsets();
   return (
     <View
-      style={[styles.pageHeader, { paddingTop: insets.top }]}
+      style={[styles.pageHeader, { paddingTop: Platform.OS === 'ios' ? 0 : insets.top  }]}
       onLayout={(event) => {
         const { height } = event.nativeEvent.layout;
         setHeaderHeight(height);

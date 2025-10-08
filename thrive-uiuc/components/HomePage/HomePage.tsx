@@ -11,7 +11,7 @@ import { ProfileSettings, StudySessionSettings, Building, Room } from "../../uti
 import NavBar from "../sharedComponents/NavBar";
 import { PageName } from "../../App";
 import PageHeader from "../sharedComponents/PageHeader";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import StudySesionInfoModal from "../sharedComponents/StudySessionInfoModal";
 
 type HomePageProps = {

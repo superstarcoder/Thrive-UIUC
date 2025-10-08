@@ -1,4 +1,4 @@
-import { SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import React from "react";
 import ProfileCard from "../sharedComponents/ProfileCard";
@@ -10,6 +10,7 @@ import NavBar from "../sharedComponents/NavBar";
 import { PageName } from "../../App";
 import { ArrowLeft, CaretLeft } from "phosphor-react-native";
 import PageHeader from "../sharedComponents/PageHeader";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type Props = {
   currentPage: PageName;
